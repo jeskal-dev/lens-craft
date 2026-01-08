@@ -1,0 +1,52 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const services = await getCollection('services');
+---
+
+<Layout title="LensCraft - Servicios">
+  <div class="container mx-auto px-4 py-20">
+    <h1 class="font-serif text-4xl md:text-5xl font-bold text-center mb-12">Inversión</h1>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-20">
+      {services.map(service => (
+        <div class="border border-border p-8 rounded-2xl hover:shadow-lg transition-all hover:-translate-y-1 bg-card text-card-foreground flex flex-col">
+          <h3 class="font-serif text-2xl font-bold mb-2">{service.data.name}</h3>
+          <p class="text-3xl font-bold text-primary mb-4">{service.data.price}</p>
+          <p class="text-muted-foreground mb-8">{service.data.description}</p>
+          <ul class="space-y-3 mb-8 flex-grow">
+            {service.data.features.map(feature => (
+              <li class="flex items-center gap-2">
+                <span class="text-primary">✓</span> {feature}
+              </li>
+            ))}
+          </ul>
+          <a href="/contact" class="block w-full text-center bg-primary text-primary-foreground py-3 rounded-lg hover:bg-primary/90 transition-colors">
+            Reservar
+          </a>
+        </div>
+      ))}
+    </div>
+
+    <div class="max-w-3xl mx-auto">
+        <h2 class="font-serif text-3xl font-bold text-center mb-12">Preguntas Frecuentes</h2>
+        <div class="space-y-4">
+            <details class="group bg-muted/20 rounded-lg p-4 cursor-pointer">
+                <summary class="font-medium list-none flex justify-between items-center">
+                    ¿Con cuánto tiempo debo reservar?
+                    <span class="transition-transform group-open:rotate-180">▼</span>
+                </summary>
+                <p class="mt-4 text-muted-foreground">Recomendamos reservar con al menos 2 semanas de antelación para asegurar disponibilidad.</p>
+            </details>
+             <details class="group bg-muted/20 rounded-lg p-4 cursor-pointer">
+                <summary class="font-medium list-none flex justify-between items-center">
+                    ¿Entregas todas las fotos?
+                    <span class="transition-transform group-open:rotate-180">▼</span>
+                </summary>
+                <p class="mt-4 text-muted-foreground">Entrego una selección curada y editada de las mejores fotos de la sesión.</p>
+            </details>
+        </div>
+    </div>
+  </div>
+</Layout>

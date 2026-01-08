@@ -1,0 +1,33 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+
+const gallery = await getCollection('gallery');
+const categories = ['bodas', 'retratos', 'paisajes', 'editorial'];
+---
+
+<Layout title="LensCraft - Galería">
+  <div class="container mx-auto px-4 py-20">
+    <h1 class="font-serif text-4xl md:text-5xl font-bold text-center mb-12">Galería</h1>
+    
+    {/* Filters - Simple implementation */}
+    <div class="flex flex-wrap justify-center gap-4 mb-12">
+      <button class="px-6 py-2 rounded-full border border-border hover:bg-primary hover:text-primary-foreground transition-colors active bg-primary text-primary-foreground">Todos</button>
+      {categories.map(cat => (
+        <button class="px-6 py-2 rounded-full border border-border hover:bg-primary hover:text-primary-foreground transition-colors capitalize">{cat}</button>
+      ))}
+    </div>
+
+    <div class="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
+      {gallery.map(item => (
+        <div class="break-inside-avoid relative group overflow-hidden rounded-lg">
+          <Image src={item.data.image} alt={item.data.title} class="w-full h-auto transition-transform duration-500 group-hover:scale-105" />
+          <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+             <span class="text-white font-serif text-xl">{item.data.title}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</Layout>

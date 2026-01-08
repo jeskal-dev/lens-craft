@@ -1,0 +1,110 @@
+@import "tailwindcss";
+
+@plugin "tailwindcss-motion";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* --- Modo Claro: Tema "Champagne & Gold" --- */
+
+  /* Fondo base: Marfil muy suave (casi blanco) */
+  --background: oklch(0.99 0.01 90);
+
+  /* Texto principal: Grafito cálido (no negro puro) */
+  --foreground: oklch(0.25 0.02 85);
+
+  /* Fondo de tarjetas: Blanco puro */
+  --card: oklch(1 0 0);
+
+  /* Borde: Beige dorado muy sutil */
+  --border: oklch(0.9 0.02 90);
+
+  /* Botón principal: Dorado profundo/antiguo */
+  --primary: oklch(0.45 0.14 65);
+
+  /* Texto sobre botón principal: Blanco puro */
+  --primary-foreground: oklch(0.99 0 0);
+
+  /* Botón secundario: Crema champán */
+  --secondary: oklch(0.94 0.03 85);
+
+  /* Acento: Dorado brillante metálico */
+  --accent: oklch(0.8 0.15 85);
+
+  /* Texto de acento: Café oscuro */
+  --accent-foreground: oklch(0.25 0.02 85);
+
+  /* Texto deshabilitado/letrero pequeño */
+  --muted: oklch(0.6 0.02 85);
+  --muted-foreground: oklch(0.5 0.03 70);
+
+  /* Anillo de enfoque */
+  --ring: oklch(0.45 0.14 65);
+}
+
+.dark {
+  /* --- Modo Oscuro: Tema "Midnight & Luxury Gold" --- */
+
+  /* Fondo base: Carbón profundo (casi negro, con matiz cálido) */
+  --background: oklch(0.14 0.02 85);
+
+  /* Texto principal: Marfil perlado */
+  --foreground: oklch(0.95 0.01 90);
+
+  /* Fondo de tarjetas: Gris muy oscuro */
+  --card: oklch(0.18 0.02 85);
+
+  /* Borde: Dorado apagado */
+  --border: oklch(0.25 0.02 85);
+
+  /* Botón principal: Dorado metálico luminoso */
+  --primary: oklch(0.75 0.15 85);
+
+  /* Texto sobre botón principal: Negro suave (contraste alto sobre el dorado) */
+  --primary-foreground: oklch(0.2 0.02 85);
+
+  /* Botón secundario: Gris oscuro */
+  --secondary: oklch(0.25 0.01 85);
+
+  /* Acento: Oro neón/brillante para detalles */
+  --accent: oklch(0.85 0.16 85);
+
+  /* Texto de acento: Marrón muy oscuro */
+  --accent-foreground: oklch(0.2 0.02 85);
+
+  /* Texto deshabilitado */
+  --muted: oklch(0.35 0.01 85);
+  --muted-foreground: oklch(0.7 0.02 85);
+
+  /* Anillo de enfoque */
+  --ring: oklch(0.75 0.15 85);
+}
+
+@theme {
+  /* Mapeo de variables CSS definidas arriba para que Tailwind v4 las use en clases */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--foreground);
+  --color-popover: var(--card);
+  --color-popover-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: oklch(0.55 0.22 25);
+  --color-destructive-foreground: oklch(0.98 0.01 85);
+
+  --font-serif: "Playfair Display", serif;
+  --font-sans: "Inter", sans-serif;
+}
+  --color-border: var(--border);
+  --color-input: var(--border);
+  --color-ring: var(--ring);
+
+  --radius: 0.5rem;
+}

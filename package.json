@@ -9,7 +9,13 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.16.7"
+    "@fontsource/inter": "^5.2.8",
+    "@fontsource/playfair-display": "^5.2.8",
+    "@tailwindcss/vite": "^4.1.18",
+    "astro": "^5.16.7",
+    "sharp": "^0.34.5",
+    "tailwindcss": "^4.1.18",
+    "tailwindcss-motion": "^1.1.1"
   },
   "packageManager": "pnpm@10.12.3+sha512.467df2c586056165580ad6dfb54ceaad94c5a30f80893ebdec5a44c5aa73c205ae4a5bb9d5ed6bb84ea7c249ece786642bbb49d06a307df218d03da41c317417"
 }

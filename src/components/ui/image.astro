@@ -1,0 +1,110 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { Image as ImagePrimitive } from "astro:assets";
+interface Props extends HTMLAttributes<"img"> {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  aspectRatio?: "1/1" | "4/3" | "16/9" | "3/2" | "2/3";
+  objectFit?: "cover" | "contain" | "fill" | "none";
+  loading?: "lazy" | "eager";
+  decoding?: "async" | "sync" | "auto";
+  fetchpriority?: "high" | "low" | "auto";
+  placeholder?: "blur" | "none";
+  class?: string;
+}
+
+const {
+  src = "",
+  alt,
+  width,
+  height,
+  aspectRatio,
+  objectFit = "cover",
+  loading = "lazy",
+  decoding = "async",
+  fetchpriority = "auto",
+  placeholder = "none",
+  class: className,
+  ...rest
+} = Astro.props;
+
+// Generate aspect ratio class
+const aspectClasses: Record<string, string> = {
+  "1/1": "aspect-square",
+  "4/3": "aspect-4/3",
+  "16/9": "aspect-video",
+  "3/2": "aspect-3/2",
+  "2/3": "aspect-2/3",
+};
+
+// Object fit classes
+const objectFitClasses: Record<string, string> = {
+  cover: "object-cover",
+  contain: "object-contain",
+  fill: "object-fill",
+  none: "object-none",
+};
+
+function generateSrcset(url: string): string | undefined {
+  if (url.includes("unsplash.com") || url.includes("picsum.photos")) {
+    const sizes = [400, 800, 1200, 1600];
+    return sizes
+      .map((size) => {
+        if (url.includes("unsplash.com")) {
+          const separator = url.includes("?") ? "&" : "?";
+          return `${url}${separator}w=${size} ${size}w`;
+        }
+        if (url.includes("picsum.photos")) {
+          // Picsum URL format: replace dimensions
+          const newUrl = url.replace(
+            /\/\d+\/\d+/,
+            `/${size}/${Math.round(size * 0.75)}`
+          );
+          return `${newUrl} ${size}w`;
+        }
+        return "";
+      })
+      .filter(Boolean)
+      .join(", ");
+  }
+  return undefined;
+}
+
+const srcset = generateSrcset(src);
+const sizes = srcset
+  ? "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+  : undefined;
+---
+
+<div
+  class:list={[
+    "relative overflow-hidden",
+    aspectRatio && aspectClasses[aspectRatio],
+    className,
+  ]}
+>
+  {
+    placeholder === "blur" && (
+      <div class="absolute inset-0 bg-muted animate-pulse" aria-hidden="true" />
+    )
+  }
+  <img
+    src={src}
+    alt={alt}
+    width={width}
+    height={height}
+    loading={loading}
+    decoding={decoding}
+    fetchpriority={fetchpriority}
+    srcset={srcset}
+    sizes={sizes}
+    class:list={[
+      "w-full h-full",
+      objectFitClasses[objectFit],
+      "motion-safe:transition-transform motion-safe:duration-500",
+    ]}
+    {...rest}
+  />
+</div>

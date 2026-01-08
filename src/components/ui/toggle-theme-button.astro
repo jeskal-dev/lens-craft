@@ -1,0 +1,104 @@
+---
+import MoonIcon from "../icons/moon-icon.astro";
+import SunIcon from "../icons/sun-icon.astro";
+---
+
+<button
+  id="theme-toggle"
+  class="relative p-2.5 rounded-2xl bg-card border border-border/40 text-muted-foreground hover:bg-primary/5 hover:border-primary/30 hover:text-primary transition-all duration-300 active:scale-90 group/theme overflow-hidden"
+  aria-label="Cambiar tema"
+>
+  <div class="relative w-5 h-5 overflow-hidden">
+    <!-- Sun Icon -->
+    <div
+      class="sun-icon absolute inset-0 transition-all duration-500 ease-orbital transform dark:translate-y-0 dark:opacity-100 dark:rotate-0 translate-y-8 opacity-0 rotate-45"
+    >
+      <SunIcon class="w-5 h-5" />
+    </div>
+    <!-- Moon Icon -->
+    <div
+      class="moon-icon absolute inset-0 transition-all duration-500 ease-orbital transform dark:translate-y-8 dark:opacity-0 dark:-rotate-45 translate-y-0 opacity-100 rotate-0 text-accent"
+    >
+      <MoonIcon class="w-5 h-5" />
+    </div>
+  </div>
+  <div
+    class="absolute inset-0 bg-primary/0 group-hover/theme:bg-primary/5 transition-colors duration-500"
+  >
+  </div>
+</button>
+
+<script>
+  import { startTransition } from "../../helpers/start-transition";
+
+  function initButton() {
+    const theme = localStorage.getItem("theme");
+
+    if (theme == "dark") {
+      document.documentElement.classList.toggle("dark");
+    }
+
+    const button = document.getElementById("theme-toggle");
+    if (!button) return;
+
+    button.addEventListener("click", () =>
+      startTransition(() => {
+        const styleId = `theme-transition-${Date.now()}`;
+        const style = document.createElement("style");
+        style.id = styleId;
+
+        const position = "top right";
+        const cx = "100";
+        const cy = "0";
+        const css = `
+        @supports (view-transition-name: root) {
+          ::view-transition-old(root) { 
+            animation: none;
+          }
+          ::view-transition-new(root) {
+            animation: circle-expand 0.4s ease-out;
+            transform-origin: ${position};
+          }
+          @keyframes circle-expand {
+            from {
+              clip-path: circle(0% at ${cx}% ${cy}%);
+            }
+            to {
+              clip-path: circle(150% at ${cx}% ${cy}%);
+            }
+          }
+        }
+      `;
+
+        style.textContent = css;
+        document.head.appendChild(style);
+
+        setTimeout(() => {
+          const styleEl = document.getElementById(styleId);
+          if (styleEl) styleEl.remove();
+        }, 3000);
+
+        document.documentElement.classList.toggle("dark");
+        const isDark = document.documentElement.classList.contains("dark");
+
+        localStorage.setItem("theme", isDark ? "dark" : "light");
+      })
+    );
+  }
+
+  initButton();
+  document.addEventListener("astro:after-swap", initButton);
+</script>
+
+<style is:global>
+  /* Custom easing for a more natural orbital feel */
+  .ease-orbital {
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Fix for Safari and browsers without VT support */
+  .no-vt .sun-icon,
+  .no-vt .moon-icon {
+    transition: none !important;
+  }
+</style>
