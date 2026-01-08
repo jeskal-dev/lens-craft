@@ -1,3 +1,88 @@
+# LensCraft Portfolio
+
+Proyecto de portafolio fotográfico desarrollado con Astro, TypeScript y Tailwind CSS.
+
+## 🚀 Inicio Rápido
+
+### Requisitos Previos
+
+- Node.js (v20 o superior recomendado)
+- pnpm (v9 o superior)
+- Git
+
+### Instalación
+
+1. Clonar el repositorio:
+
+   ```bash
+   git clone <url-del-repo>
+   cd lens-craft
+   ```
+
+2. Instalar dependencias:
+
+   ```bash
+   pnpm install
+   ```
+
+3. Iniciar servidor de desarrollo:
+   ```bash
+   pnpm dev
+   ```
+
+El sitio estará disponible en `http://localhost:4321`.
+
+## 🛠 Stack Tecnológico
+
+- **Framework:** [Astro](https://astro.build) v5
+- **Estilos:** [Tailwind CSS](https://tailwindcss.com) v4
+- **Animaciones:** [tailwindcss-motion](https://github.com/romboHQ/tailwindcss-motion)
+- **Tipografía:** @fontsource (Playfair Display & Inter)
+- **Gestión de Paquetes:** pnpm
+
+## 📁 Estructura del Proyecto
+
+```
+/
+├── src/
+│   ├── assets/        # Imágenes y assets estáticos
+│   ├── components/    # Componentes reutilizables (Header, Footer, UI)
+│   ├── content/       # Colecciones de contenido (Gallery, Services)
+│   ├── layouts/       # Layouts principales
+│   ├── pages/         # Rutas y páginas (index, gallery, etc.)
+│   └── styles/        # CSS Global y configuración de Tailwind
+├── public/            # Archivos públicos estáticos
+├── astro.config.mjs   # Configuración de Astro
+└── package.json       # Dependencias y scripts
+```
+
+## 🔄 Flujo de Trabajo y CI/CD
+
+- **Ramas:**
+
+  - `main`: Producción.
+  - `develop` (opcional): Desarrollo.
+  - Feature branches: `feature/nombre-feature`.
+
+- **CI (GitHub Actions):**
+
+  - Se ejecuta en cada push a `main` y Pull Requests.
+  - Tareas: Instalación de dependencias y Build (`pnpm build`).
+  - Archivo: `.github/workflows/ci.yml`.
+
+- **Calidad de Código:**
+  - Uso de TypeScript para tipado estático.
+  - Estándares de código definidos por ESLint/Prettier (configurable).
+
+## 📝 Gestión de Contenido
+
+El contenido se gestiona a través de **Astro Content Collections** en `src/content/`.
+
+- **Galería:** Archivos `.md` en `src/content/gallery/` con frontmatter (título, categoría, imagen, fecha, destacado).
+- **Servicios:** Archivos `.json` en `src/content/services/` (nombre, precio, descripción, características).
+
+---
+
 # Plan de Desarrollo - LensCraft Portfolio
 
 **Nombre del Proyecto:** LensCraft  
