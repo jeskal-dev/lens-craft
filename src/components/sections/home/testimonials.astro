@@ -1,0 +1,73 @@
+---
+import TestimonialCard from "../../cards/testimonial-card.astro";
+
+const testimonials = [
+  {
+    name: "Laura y Martín",
+    role: "Boda en Barcelona",
+    content:
+      "Las fotos de nuestra boda superaron todas las expectativas. Capturaron momentos que ni siquiera sabíamos que existían con una sensibilidad única.",
+    avatar:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150&h=150&auto=format&fit=crop",
+    rating: 5,
+  },
+  {
+    name: "Carlos Ruiz",
+    role: "Emprendedor",
+    content:
+      "Profesionalismo puro. Las sesiones de retrato para mi marca personal han transformado completamente mi imagen online y mi confianza.",
+    avatar:
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=150&h=150&auto=format&fit=crop",
+    rating: 5,
+  },
+  {
+    name: "Elena Sanz",
+    role: "Diseñadora de Moda",
+    content:
+      "Trabajar con LensCraft fue una experiencia artística en sí misma. Tienen un ojo para el detalle y la luz que simplemente no se encuentra en otros sitios.",
+    avatar:
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=150&h=150&auto=format&fit=crop",
+    rating: 5,
+  },
+];
+---
+
+<section class="py-32 bg-background relative overflow-hidden">
+  <!-- Decorative background elements -->
+  <div
+    class="absolute top-1/4 -left-20 w-96 h-96 bg-primary/5 blur-[120px] rounded-full -z-10"
+  >
+  </div>
+  <div
+    class="absolute bottom-1/4 -right-20 w-96 h-96 bg-primary/5 blur-[120px] rounded-full -z-10"
+  >
+  </div>
+
+  <div class="container mx-auto px-6 relative z-10">
+    <!-- Header -->
+    <div class="max-w-3xl mx-auto text-center mb-20 space-y-4">
+      <div
+        class="inline-flex items-center gap-2 text-primary text-xs font-bold uppercase tracking-[0.2em] motion-translate-x-in--20 motion-opacity-in-0"
+      >
+        <span class="w-8 h-px bg-primary"></span>
+        Experiencias Reales
+      </div>
+      <h2
+        class="text-4xl md:text-6xl font-serif font-bold text-foreground motion-translate-y-in-50 motion-opacity-in-0"
+      >
+        Lo que dicen de <span class="text-primary italic">LensCraft</span>
+      </h2>
+      <p
+        class="text-muted-foreground text-lg motion-translate-y-in-50 motion-opacity-in-0 motion-delay-200"
+      >
+        Cada sesión es una colaboración. Aquí algunas de las historias que hemos
+        tenido el honor de contar.
+      </p>
+    </div>
+
+    <!-- Testimonials Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+      {testimonials.map((t, index) => <TestimonialCard {...t} index={index} />)}
+    </div>
+  </div>
+</section>

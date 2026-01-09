@@ -1,59 +1,23 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { getCollection } from 'astro:content';
-import { Image } from 'astro:assets';
+import { getCollection } from "astro:content";
+import Layout from "../components/layouts/layout.astro";
+import HomeHero from "../components/sections/home/hero.astro";
+import HomeFeaturedWork from "../components/sections/home/featured-work.astro";
+import HomePhilosophy from "../components/sections/home/philosophy.astro";
+import HomeTestimonials from "../components/sections/home/testimonials.astro";
 
-const featuredWork = await getCollection('gallery', ({ data }) => {
+const featuredWorks = await getCollection("gallery", ({ data }) => {
   return data.featured === true;
 });
+
+const sortedWorks = featuredWorks
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 5);
 ---
 
-<Layout title="LensCraft - Inicio">
-  <!-- Hero -->
-  <section class="relative h-screen flex items-center justify-center overflow-hidden">
-    <div class="absolute inset-0 z-0 bg-muted/20">
-       {/* Background Image Placeholder or Real Image */}
-    </div>
-    <div class="relative z-10 text-center space-y-8 p-4 motion-preset-fade motion-duration-1000">
-      <h1 class="font-serif text-5xl md:text-7xl font-bold text-foreground leading-tight">
-        Capturando Momentos,<br/>Eternizando Historias
-      </h1>
-      <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
-        Fotografía profesional con un toque artístico y personal.
-      </p>
-      <div class="motion-preset-slide-up motion-delay-300">
-        <a href="/gallery" class="inline-block bg-primary text-primary-foreground px-8 py-3 rounded-full text-lg font-medium hover:scale-105 transition-transform">
-          Ver Galería
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Featured Work -->
-  <section class="py-20 container mx-auto px-4">
-    <h2 class="font-serif text-3xl md:text-4xl font-bold text-center mb-12">Trabajos Destacados</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      {featuredWork.map(work => (
-        <a href={`/gallery`} class="group relative overflow-hidden rounded-lg aspect-[3/4] block">
-          <Image src={work.data.image} alt={work.data.title} class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110" />
-          <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-            <div>
-              <h3 class="text-white font-serif text-xl">{work.data.title}</h3>
-              <p class="text-white/80 capitalize">{work.data.category}</p>
-            </div>
-          </div>
-        </a>
-      ))}
-    </div>
-  </section>
-
-  <!-- Philosophy -->
-  <section class="py-20 bg-muted/30">
-    <div class="container mx-auto px-4 text-center max-w-3xl">
-      <h2 class="font-serif text-3xl font-bold mb-6">Nuestra Filosofía</h2>
-      <p class="text-lg text-muted-foreground leading-relaxed">
-        Creemos que cada fotografía cuenta una historia única. Nuestro enfoque combina la técnica profesional con una visión artística para capturar la esencia de cada momento, creando recuerdos que perduran para siempre.
-      </p>
-    </div>
-  </section>
+<Layout title="Inicio">
+  <HomeHero />
+  <HomeFeaturedWork works={sortedWorks} />
+  <HomePhilosophy />
+  <HomeTestimonials />
 </Layout>

@@ -1,0 +1,146 @@
+---
+import { Icon } from "astro-icon/components";
+import Button from "../../ui/button.astro";
+---
+
+<section
+  class="relative h-dvh flex items-center pt-28 md:pt-32 pb-12 overflow-hidden bg-background"
+>
+  <!-- Background Decorative skew -->
+  <div
+    class="absolute top-0 right-0 w-1/3 h-full bg-primary/5 -skew-x-12 translate-x-1/2 -z-10"
+  >
+  </div>
+
+  <div
+    class="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center"
+  >
+    <!-- Left Column: Content -->
+    <div class="space-y-6 md:space-y-8 relative z-10 text-center lg:text-left">
+      <div
+        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] md:text-xs font-bold uppercase tracking-widest motion-translate-x-in--20 motion-opacity-in-0 motion-duration-700"
+      >
+        <span class="relative flex h-2 w-2">
+          <span
+            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"
+          ></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"
+          ></span>
+        </span>
+        Booking 2024 Abierto
+      </div>
+
+      <div class="space-y-3 md:space-y-4">
+        <h1
+          class="text-5xl md:text-7xl xl:text-8xl font-serif font-bold tracking-tight leading-[0.9] text-foreground motion-translate-y-in-50 motion-opacity-in-0 motion-duration-1000"
+        >
+          El Arte de <br />
+          <span class="text-primary italic">Congelar</span>
+          <br />
+          Historias.
+        </h1>
+        <p
+          class="text-base md:text-lg text-muted-foreground max-w-lg mx-auto lg:mx-0 leading-relaxed motion-translate-y-in-50 motion-opacity-in-0 motion-duration-1000 motion-delay-200"
+        >
+          Transformamos instantes fugaces en legados visuales eternos.
+          Fotografía de autor cinematográfica e íntima.
+        </p>
+      </div>
+
+      <div
+        class="flex flex-wrap justify-center lg:justify-start gap-4 motion-translate-y-in-50 motion-opacity-in-0 motion-duration-1000 motion-delay-400"
+      >
+        <Button
+          href="/gallery"
+          size="lg"
+          rounded="full"
+          withIcon
+          iconPosition="right"
+        >
+          Portafolio
+        </Button>
+        <Button href="/contact" variant="outline" size="lg" rounded="full">
+          Contacto
+        </Button>
+      </div>
+
+      <!-- Compact Quick Stats -->
+      <div
+        class="flex justify-center lg:justify-start gap-8 md:gap-12 pt-8 border-t border-border/50 motion-opacity-in-0 motion-duration-1000 motion-delay-600"
+      >
+        <div>
+          <p class="text-2xl font-serif font-bold text-foreground">150+</p>
+          <p
+            class="text-[10px] text-muted-foreground uppercase tracking-wider font-bold"
+          >
+            Bodas
+          </p>
+        </div>
+        <div>
+          <p class="text-2xl font-serif font-bold text-foreground">22</p>
+          <p
+            class="text-[10px] text-muted-foreground uppercase tracking-wider font-bold"
+          >
+            Premios
+          </p>
+        </div>
+        <div>
+          <p class="text-2xl font-serif font-bold text-foreground">10</p>
+          <p
+            class="text-[10px] text-muted-foreground uppercase tracking-wider font-bold"
+          >
+            Años
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Compact Image Collage -->
+    <div
+      class="relative flex items-center justify-center h-80 lg:h-140 mt-8 lg:mt-0"
+    >
+      <!-- Main Image -->
+      <div
+        class="relative z-10 w-full max-w-80 aspect-4/5 rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl transition-all duration-700 motion-scale-in-90 motion-opacity-in-0 motion-duration-1000 motion-delay-300 transform-gpu hover:scale-[1.02]"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?q=80&w=2070&auto=format&fit=crop"
+          alt="Fotografía Principal"
+          class="w-full h-full object-cover"
+        />
+        <div
+          class="absolute inset-0 bg-linear-to-t from-black/50 to-transparent"
+        >
+        </div>
+      </div>
+
+      <!-- Floating Small Detail -->
+      <div
+        class="absolute -top-6 -right-2 md:-right-8 w-32 md:w-44 aspect-square rounded-xl overflow-hidden shadow-xl border-4 border-background z-20 motion-translate-y-in--50 motion-opacity-in-0 motion-duration-1000 motion-delay-500 hidden sm:block rotate-2"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop"
+          alt="Detalle"
+          class="w-full h-full object-cover"
+        />
+      </div>
+
+      <!-- Floating Bottom Overlay -->
+      <div
+        class="absolute -bottom-6 -left-2 md:-left-8 w-44 md:w-60 aspect-video rounded-xl overflow-hidden shadow-xl border-4 border-background z-20 motion-translate-y-in-50 motion-opacity-in-0 motion-duration-1000 motion-delay-700 hidden sm:block -rotate-2"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2070&auto=format&fit=crop"
+          alt="Contexto"
+          class="w-full h-full object-cover"
+        />
+      </div>
+
+      <!-- Decorative Circles -->
+      <div
+        class="absolute inset-0 flex items-center justify-center -z-10 bg-primary/5 blur-3xl rounded-full scale-150 motion-opacity-in-0 motion-duration-1000"
+      >
+      </div>
+    </div>
+  </div>
+</section>

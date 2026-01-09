@@ -1,0 +1,66 @@
+---
+import type { CollectionEntry } from "astro:content";
+import WorkCard from "../../cards/work-card.astro";
+import Button from "../../ui/button.astro";
+
+interface Props {
+  works: CollectionEntry<"gallery">[];
+}
+
+const { works } = Astro.props;
+
+// Bento layout mapping for 5 items
+const bentoConfigs = [
+  { class: "md:col-span-8 md:row-span-2 h-[400px] md:h-[664px]" }, // Large featured (2 rows + gap)
+  { class: "md:col-span-4 md:row-span-1 h-[300px] md:h-[320px]" }, // Small top right
+  { class: "md:col-span-4 md:row-span-1 h-[300px] md:h-[320px]" }, // Mid right below small
+  { class: "md:col-span-6 md:row-span-1 h-[350px] md:h-[350px]" }, // Bottom left
+  { class: "md:col-span-6 md:row-span-1 h-[350px] md:h-[350px]" }, // Bottom right
+];
+---
+
+<section class="py-32 bg-background relative overflow-hidden">
+  <div class="container mx-auto px-6 relative z-10">
+    <!-- Section Header -->
+    <div
+      class="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8"
+    >
+      <div class="max-w-xl space-y-4">
+        <div
+          class="inline-flex items-center gap-2 text-primary text-xs font-bold uppercase tracking-[0.2em] motion-translate-x-in--20 motion-opacity-in-0"
+        >
+          <span class="w-8 h-px bg-primary"></span>
+          Portafolio Seleccionado
+        </div>
+        <h2
+          class="text-4xl md:text-6xl font-serif font-bold text-foreground leading-tight motion-translate-y-in-50 motion-opacity-in-0"
+        >
+          Historias que merecen ser <span class="text-primary italic"
+            >Inmortalizadas</span
+          >
+        </h2>
+      </div>
+      <div class="motion-opacity-in-0 motion-delay-500">
+        <Button
+          href="/gallery"
+          variant="outline"
+          rounded="full"
+          withIcon
+          iconPosition="right"
+        >
+          Explorar Todo
+        </Button>
+      </div>
+    </div>
+
+    <!-- Bento Gallery Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6">
+      {
+        works.map((work, index) => {
+          const config = bentoConfigs[index % bentoConfigs.length];
+          return <WorkCard work={work} index={index} class={config.class} />;
+        })
+      }
+    </div>
+  </div>
+</section>

@@ -1,11 +1,14 @@
 import { defineCollection, z } from 'astro:content';
 
 const gallery = defineCollection({
-  schema: ({ image }) => z.object({
+  type: 'content',
+  schema: z.object({
     title: z.string(),
     category: z.enum(['bodas', 'retratos', 'paisajes', 'editorial']),
-    image: image(),
+    image: z.string(),
     date: z.date(),
+    description: z.string(),
+    author: z.string(),
     featured: z.boolean().default(false),
   }),
 });

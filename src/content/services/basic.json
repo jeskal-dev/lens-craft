@@ -1,11 +1,11 @@
 {
-  "name": "Básico",
-  "price": "$299",
-  "description": "Sesión ideal para parejas o retratos individuales.",
+  "name": "Esencial",
+  "price": "299€",
+  "description": "Ideal para sesiones rápidas o perfiles profesionales.",
   "features": [
     "1 hora de sesión",
-    "20 fotos editadas",
-    "Galería online",
-    "Entrega en 48 horas"
+    "1 ubicación",
+    "10 fotos editadas en alta resolución",
+    "Galería online privada"
   ]
 }

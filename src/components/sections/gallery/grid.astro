@@ -1,0 +1,22 @@
+---
+import type { CollectionEntry } from "astro:content";
+import WorkCard from "../../cards/work-card.astro";
+
+interface Props {
+  works: CollectionEntry<"gallery">[];
+  categoryLabels: Record<string, string>;
+}
+
+const { works, categoryLabels } = Astro.props;
+---
+
+<div
+  id="gallery-grid"
+  class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 auto-rows-[260px] md:auto-rows-[320px]"
+>
+  {
+    works.map((work, index) => (
+      <WorkCard work={work} index={index} class="h-full" />
+    ))
+  }
+</div>

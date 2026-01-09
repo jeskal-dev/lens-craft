@@ -1,0 +1,13 @@
+{
+  "name": "Premium",
+  "price": "999€",
+  "description": "Cobertura total y experiencia de lujo.",
+  "features": [
+    "Sesión de día completo",
+    "Ubicaciones ilimitadas",
+    "Todas las fotos editadas (100+)",
+    "Álbum físico de lujo",
+    "Maquillaje y peinado incluido",
+    "Video resumen de 1 minuto"
+  ]
+}

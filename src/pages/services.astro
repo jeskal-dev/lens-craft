@@ -1,52 +1,680 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { getCollection } from 'astro:content';
+import { getCollection } from "astro:content";
+import { Icon } from "astro-icon/components";
+import Layout from "../components/layouts/layout.astro";
+import Button from "../components/ui/button.astro";
 
-const services = await getCollection('services');
+const services = await getCollection("services");
+
+const order = ["basic", "standard", "premium"];
+const sortedServices = services.sort((a, b) => {
+  const aIndex = order.indexOf(a.id);
+  const bIndex = order.indexOf(b.id);
+  return (aIndex === -1 ? 99 : aIndex) - (bIndex === -1 ? 99 : bIndex);
+});
+
+const faqs = [
+  {
+    question: "¿Cómo reservo una sesión?",
+    answer:
+      "Completa el formulario indicando el tipo de sesión y la fecha aproximada. Te responderemos en menos de 24 horas con la disponibilidad y los siguientes pasos.",
+  },
+  {
+    question: "¿Cuánto tarda en entregarse el material?",
+    answer:
+      "El plazo habitual de entrega es de 2 a 4 semanas según el tipo de sesión y el volumen de edición requerido. Siempre recibirás una fecha estimada al confirmar la reserva.",
+  },
+  {
+    question: "¿Puedo personalizar un paquete?",
+    answer:
+      "Sí. Los paquetes sirven como base, pero podemos ajustar duración, ubicaciones y extras para adaptarlos a lo que necesitas.",
+  },
+  {
+    question: "¿Trabajas fuera de tu ciudad?",
+    answer:
+      "Sí, realizamos sesiones en otras ciudades y destinos. Los costos de desplazamiento se calculan en función de la ubicación y se detallan antes de la reserva.",
+  },
+];
 ---
 
-<Layout title="LensCraft - Servicios">
-  <div class="container mx-auto px-4 py-20">
-    <h1 class="font-serif text-4xl md:text-5xl font-bold text-center mb-12">Inversión</h1>
-    
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-20">
-      {services.map(service => (
-        <div class="border border-border p-8 rounded-2xl hover:shadow-lg transition-all hover:-translate-y-1 bg-card text-card-foreground flex flex-col">
-          <h3 class="font-serif text-2xl font-bold mb-2">{service.data.name}</h3>
-          <p class="text-3xl font-bold text-primary mb-4">{service.data.price}</p>
-          <p class="text-muted-foreground mb-8">{service.data.description}</p>
-          <ul class="space-y-3 mb-8 flex-grow">
-            {service.data.features.map(feature => (
-              <li class="flex items-center gap-2">
-                <span class="text-primary">✓</span> {feature}
-              </li>
-            ))}
-          </ul>
-          <a href="/contact" class="block w-full text-center bg-primary text-primary-foreground py-3 rounded-lg hover:bg-primary/90 transition-colors">
-            Reservar
-          </a>
-        </div>
-      ))}
+<Layout
+  title="Servicios"
+  description="Descubre los paquetes fotográficos de LensCraft y elige el que mejor se adapte a tu historia."
+>
+  <div id="services-page" class="relative bg-background">
+    <div
+      class="pointer-events-none absolute inset-x-0 -top-40 -z-10 h-80 bg-radial from-primary/18 via-background to-background opacity-90"
+      aria-hidden="true"
+    >
     </div>
 
-    <div class="max-w-3xl mx-auto">
-        <h2 class="font-serif text-3xl font-bold text-center mb-12">Preguntas Frecuentes</h2>
-        <div class="space-y-4">
-            <details class="group bg-muted/20 rounded-lg p-4 cursor-pointer">
-                <summary class="font-medium list-none flex justify-between items-center">
-                    ¿Con cuánto tiempo debo reservar?
-                    <span class="transition-transform group-open:rotate-180">▼</span>
-                </summary>
-                <p class="mt-4 text-muted-foreground">Recomendamos reservar con al menos 2 semanas de antelación para asegurar disponibilidad.</p>
-            </details>
-             <details class="group bg-muted/20 rounded-lg p-4 cursor-pointer">
-                <summary class="font-medium list-none flex justify-between items-center">
-                    ¿Entregas todas las fotos?
-                    <span class="transition-transform group-open:rotate-180">▼</span>
-                </summary>
-                <p class="mt-4 text-muted-foreground">Entrego una selección curada y editada de las mejores fotos de la sesión.</p>
-            </details>
+    <section class="pt-28 md:pt-32 pb-16 md:pb-24">
+      <div
+        class="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] gap-12 lg:gap-16 items-center"
+      >
+        <div class="space-y-6 md:space-y-8">
+          <div
+            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] motion-translate-x-in--20 motion-opacity-in-0 motion-duration-700"
+          >
+            <Icon name="lucide:sparkles" class="w-3 h-3" />
+            <span>Servicios fotográficos profesionales</span>
+          </div>
+
+          <div class="space-y-4">
+            <h1
+              class="text-4xl md:text-5xl lg:text-6xl font-serif font-bold tracking-tight leading-[1.05] text-foreground motion-translate-y-in-50 motion-opacity-in-0 motion-duration-800"
+            >
+              Paquetes diseñados
+              <span class="text-primary italic">para cada historia.</span>
+            </h1>
+            <p
+              class="text-base md:text-lg text-muted-foreground max-w-xl leading-relaxed motion-translate-y-in-50 motion-opacity-in-0 motion-duration-800 motion-delay-150"
+            >
+              Desde sesiones íntimas hasta coberturas completas de boda. Elige
+              el paquete que mejor se adapta a tu visión y deja que nos
+              encarguemos del resto.
+            </p>
+          </div>
+
+          <div
+            class="flex flex-wrap gap-4 items-center motion-translate-y-in-50 motion-opacity-in-0 motion-duration-800 motion-delay-250"
+          >
+            <Button
+              href="#contacto-servicios"
+              size="lg"
+              rounded="full"
+              withIcon
+              iconPosition="right"
+            >
+              Solicitar presupuesto
+            </Button>
+            <Button href="/gallery" variant="outline" size="lg" rounded="full">
+              Ver trabajos
+            </Button>
+            <p class="text-xs text-muted-foreground">
+              Respuesta en menos de 24 horas.
+            </p>
+          </div>
+
+          <dl
+            class="grid grid-cols-2 md:grid-cols-3 gap-4 pt-6 border-t border-border/60 motion-opacity-in-0 motion-duration-800 motion-delay-350"
+          >
+            <div>
+              <dt
+                class="text-xs font-bold uppercase tracking-widest text-muted-foreground"
+              >
+                Sesiones entregadas
+              </dt>
+              <dd class="text-2xl font-serif font-bold text-foreground">
+                300+
+              </dd>
+            </div>
+            <div>
+              <dt
+                class="text-xs font-bold uppercase tracking-widest text-muted-foreground"
+              >
+                Clientes felices
+              </dt>
+              <dd class="text-2xl font-serif font-bold text-foreground">98%</dd>
+            </div>
+            <div>
+              <dt
+                class="text-xs font-bold uppercase tracking-widest text-muted-foreground"
+              >
+                Entrega promedio
+              </dt>
+              <dd class="text-2xl font-serif font-bold text-foreground">
+                3 semanas
+              </dd>
+            </div>
+          </dl>
         </div>
-    </div>
+
+        <div class="relative">
+          <div
+            class="absolute inset-0 bg-primary/10 blur-3xl rounded-full -z-10"
+            aria-hidden="true"
+          >
+          </div>
+          <div
+            class="relative aspect-[4/3] rounded-3xl overflow-hidden border border-white/10 bg-linear-to-br from-background to-background/40 shadow-2xl motion-scale-in-90 motion-opacity-in-0 motion-duration-800 motion-delay-200"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1600&auto=format&fit=crop"
+              alt="Equipo fotográfico preparado para una sesión"
+              loading="lazy"
+              decoding="async"
+              class="w-full h-full object-cover opacity-80"
+            />
+            <div
+              class="absolute inset-0 bg-linear-to-t from-background/90 via-background/40 to-transparent"
+            >
+            </div>
+            <div class="absolute inset-0 p-6 flex flex-col justify-between">
+              <div class="flex items-center gap-3">
+                <div
+                  class="w-10 h-10 rounded-2xl bg-background/80 flex items-center justify-center border border-white/10"
+                >
+                  <Icon name="lucide:aperture" class="w-5 h-5 text-primary" />
+                </div>
+                <div>
+                  <p
+                    class="text-xs text-muted-foreground uppercase tracking-wide"
+                  >
+                    Workflow
+                  </p>
+                  <p class="text-sm text-foreground font-medium">
+                    Briefing, sesión, edición y entrega online.
+                  </p>
+                </div>
+              </div>
+              <div class="grid grid-cols-3 gap-4 text-xs text-muted-foreground">
+                <div class="space-y-1">
+                  <p class="font-bold text-foreground">Previo</p>
+                  <p>Asesoría de vestuario y localización.</p>
+                </div>
+                <div class="space-y-1">
+                  <p class="font-bold text-foreground">Sesión</p>
+                  <p>Dirección creativa durante toda la sesión.</p>
+                </div>
+                <div class="space-y-1">
+                  <p class="font-bold text-foreground">Entrega</p>
+                  <p>Galería online privada y descarga en alta resolución.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section
+      aria-labelledby="services-heading"
+      class="py-12 md:py-20 border-t border-border/60 bg-linear-to-b from-background via-background/90 to-background"
+    >
+      <div class="container mx-auto px-6 space-y-10 md:space-y-14">
+        <header class="max-w-3xl space-y-4">
+          <p
+            class="text-xs font-bold uppercase tracking-[0.4em] text-primary motion-opacity-in-0 motion-duration-700"
+          >
+            Paquetes
+          </p>
+          <h2
+            id="services-heading"
+            class="text-3xl md:text-4xl font-serif font-bold text-foreground motion-translate-y-in-50 motion-opacity-in-0 motion-duration-800"
+          >
+            Tres niveles, una misma obsesión por el detalle.
+          </h2>
+          <p
+            class="text-sm md:text-base text-muted-foreground motion-translate-y-in-50 motion-opacity-in-0 motion-duration-800 motion-delay-150"
+          >
+            Todos los paquetes incluyen asesoría previa, selección curada de
+            imágenes y edición profesional en clave cinematográfica.
+          </p>
+        </header>
+
+        <div
+          class="grid gap-6 md:gap-8 md:grid-cols-3 lg:grid-cols-3 motion-translate-y-in-50 motion-opacity-in-0 motion-duration-800 motion-delay-200"
+        >
+          {
+            sortedServices.map((service, index) => {
+              const isPopular = service.id === "standard";
+              const delay = (index + 1) * 150 + 150;
+
+              return (
+                <article
+                  class={`relative group flex flex-col h-full rounded-3xl border backdrop-blur-xl bg-card/60 border-white/10 shadow-sm hover:shadow-xl hover:border-primary/40 motion-translate-y-in-50 motion-opacity-in-0`}
+                  style={`--motion-delay: ${delay}ms`}
+                >
+                  {isPopular && (
+                    <p class="absolute -top-3 left-4 inline-flex items-center gap-1 rounded-full bg-primary text-primary-foreground px-3 py-1 text-[10px] font-semibold tracking-widest uppercase shadow-lg shadow-primary/30">
+                      <Icon
+                        name="lucide:flame"
+                        class="w-3 h-3"
+                        aria-hidden="true"
+                      />
+                      Más solicitado
+                    </p>
+                  )}
+
+                  <div class="p-6 md:p-7 flex flex-col gap-4">
+                    <div class="flex items-center justify-between gap-3">
+                      <h3 class="text-xl md:text-2xl font-serif font-bold">
+                        {service.data.name}
+                      </h3>
+                      <div
+                        class="flex items-center justify-center w-10 h-10 rounded-2xl bg-primary/10 border border-primary/30 text-primary"
+                        aria-hidden="true"
+                      >
+                        <Icon name="lucide:camera" class="w-5 h-5" />
+                      </div>
+                    </div>
+
+                    <p class="text-sm text-muted-foreground leading-relaxed min-h-[3rem]">
+                      {service.data.description}
+                    </p>
+
+                    <p class="text-3xl font-serif font-bold text-foreground">
+                      {service.data.price}
+                    </p>
+                    <p class="text-xs text-muted-foreground">
+                      Impuestos y desplazamientos no incluidos. Consulta para
+                      sesiones fuera de la ciudad.
+                    </p>
+
+                    <ul class="mt-4 space-y-2 text-sm text-muted-foreground">
+                      {service.data.features.map((feature) => (
+                        <li class="flex items-start gap-2">
+                          <span
+                            class="mt-1 w-4 h-4 rounded-full bg-primary/10 flex items-center justify-center text-[10px] text-primary"
+                            aria-hidden="true"
+                          >
+                            <Icon name="lucide:check" class="w-3 h-3" />
+                          </span>
+                          <span>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div class="px-6 md:px-7 pb-6 md:pb-7 mt-auto">
+                    <Button
+                      href={`#contacto-servicios`}
+                      fullWidth
+                      rounded="lg"
+                      size="md"
+                      withIcon
+                    >
+                      Reservar {service.data.name}
+                    </Button>
+                    <p class="mt-3 text-[11px] text-muted-foreground text-center">
+                      Indica el nombre del paquete en el mensaje del formulario.
+                    </p>
+                  </div>
+                </article>
+              );
+            })
+          }
+        </div>
+      </div>
+    </section>
+
+    <section
+      aria-labelledby="faq-heading"
+      class="py-16 md:py-24 border-t border-border/60 bg-background"
+    >
+      <div class="container mx-auto px-6 max-w-4xl space-y-10">
+        <header class="space-y-3 text-center">
+          <p
+            class="text-xs font-bold uppercase tracking-[0.4em] text-primary motion-opacity-in-0 motion-duration-700"
+          >
+            Preguntas frecuentes
+          </p>
+          <h2
+            id="faq-heading"
+            class="text-3xl md:text-4xl font-serif font-bold text-foreground motion-translate-y-in-50 motion-opacity-in-0 motion-duration-800"
+          >
+            Todo lo que necesitas saber antes de reservar.
+          </h2>
+        </header>
+
+        <div
+          class="space-y-3 motion-translate-y-in-50 motion-opacity-in-0 motion-duration-800 motion-delay-150"
+          role="list"
+        >
+          {
+            faqs.map((faq, index) => {
+              const isFirst = index === 0;
+              const panelId = `faq-panel-${index}`;
+              const buttonId = `faq-trigger-${index}`;
+
+              return (
+                <div
+                  class="border border-border/70 rounded-2xl bg-card/50 overflow-hidden"
+                  role="listitem"
+                >
+                  <button
+                    id={buttonId}
+                    type="button"
+                    class="w-full flex items-center justify-between gap-4 px-5 md:px-6 py-4 md:py-5 text-left text-sm md:text-base font-medium text-foreground hover:bg-muted/50 motion-safe:transition-colors"
+                    aria-expanded={isFirst ? "true" : "false"}
+                    aria-controls={panelId}
+                    data-faq-trigger
+                    data-faq-id={String(index)}
+                  >
+                    <span class="flex-1">{faq.question}</span>
+                    <span
+                      class="shrink-0 w-8 h-8 rounded-full border border-border flex items-center justify-center text-muted-foreground motion-safe:transition-transform"
+                      aria-hidden="true"
+                    >
+                      <Icon
+                        name="lucide:chevron-down"
+                        class="w-4 h-4"
+                        data-faq-icon
+                      />
+                    </span>
+                  </button>
+                  <div
+                    id={panelId}
+                    role="region"
+                    aria-labelledby={buttonId}
+                    data-faq-panel
+                    data-faq-id={String(index)}
+                    class="grid overflow-hidden transition-[grid-template-rows,opacity] duration-300 ease-out bg-card/70"
+                    style={
+                      isFirst
+                        ? "grid-template-rows: 1fr; opacity: 1;"
+                        : "grid-template-rows: 0fr; opacity: 0;"
+                    }
+                  >
+                    <div class="min-h-0 px-5 md:px-6 pb-4 md:pb-5 text-sm text-muted-foreground">
+                      <p>{faq.answer}</p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })
+          }
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="contacto-servicios"
+      aria-labelledby="services-contact-heading"
+      class="py-16 md:py-24 border-t border-border/60 bg-linear-to-b from-background via-background to-background/95"
+    >
+      <div class="container mx-auto px-6 max-w-5xl">
+        <div
+          class="grid gap-10 md:gap-12 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] items-start"
+        >
+          <div class="space-y-6">
+            <p
+              class="text-xs font-bold uppercase tracking-[0.4em] text-primary motion-opacity-in-0 motion-duration-700"
+            >
+              Contacto
+            </p>
+            <h2
+              id="services-contact-heading"
+              class="text-3xl md:text-4xl font-serif font-bold text-foreground motion-translate-y-in-50 motion-opacity-in-0 motion-duration-800"
+            >
+              Cuéntanos qué quieres fotografiar.
+            </h2>
+            <p
+              class="text-sm md:text-base text-muted-foreground motion-translate-y-in-50 motion-opacity-in-0 motion-duration-800 motion-delay-150"
+            >
+              Completa el formulario y dinos qué tipo de sesión te interesa,
+              fecha aproximada y cualquier detalle que consideres importante.
+              Utilizaremos esta información para proponerte el mejor enfoque.
+            </p>
+            <div class="space-y-2 text-sm text-muted-foreground">
+              <p class="font-semibold text-foreground">
+                También puedes escribirnos directamente:
+              </p>
+              <p>
+                Email:
+                <a
+                  href="mailto:hola@lenscraft.studio"
+                  class="underline decoration-primary/50 underline-offset-4 hover:text-primary"
+                >
+                  hola@lenscraft.studio
+                </a>
+              </p>
+              <p>
+                Instagram:
+                <a
+                  href="https://instagram.com"
+                  class="underline decoration-primary/50 underline-offset-4 hover:text-primary"
+                >
+                  @lenscraft
+                </a>
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="rounded-3xl border border-border/80 bg-card/80 backdrop-blur-xl p-6 md:p-7 shadow-lg motion-translate-y-in-50 motion-opacity-in-0 motion-duration-800 motion-delay-200"
+          >
+            <form
+              id="services-contact-form"
+              class="space-y-4"
+              aria-describedby="services-contact-hint"
+              novalidate
+            >
+              <div class="space-y-2">
+                <label
+                  for="contact-name"
+                  class="text-sm font-medium text-foreground"
+                >
+                  Nombre completo
+                </label>
+                <input
+                  id="contact-name"
+                  name="name"
+                  type="text"
+                  required
+                  autocomplete="name"
+                  class="w-full rounded-xl border border-border bg-background/70 px-3 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-safe:transition-shadow"
+                  placeholder="Ej. Laura y Miguel"
+                  data-validate="text"
+                />
+                <p
+                  class="mt-1 text-xs text-destructive hidden"
+                  data-error-for="contact-name"
+                >
+                  Por favor, indica tu nombre.
+                </p>
+              </div>
+
+              <div class="space-y-2">
+                <label
+                  for="contact-email"
+                  class="text-sm font-medium text-foreground"
+                >
+                  Email
+                </label>
+                <input
+                  id="contact-email"
+                  name="email"
+                  type="email"
+                  required
+                  autocomplete="email"
+                  class="w-full rounded-xl border border-border bg-background/70 px-3 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-safe:transition-shadow"
+                  placeholder="nombre@correo.com"
+                  data-validate="email"
+                />
+                <p
+                  class="mt-1 text-xs text-destructive hidden"
+                  data-error-for="contact-email"
+                >
+                  Introduce un email válido.
+                </p>
+              </div>
+
+              <div class="space-y-2">
+                <label
+                  for="contact-session"
+                  class="text-sm font-medium text-foreground"
+                >
+                  Tipo de sesión
+                </label>
+                <select
+                  id="contact-session"
+                  name="sessionType"
+                  required
+                  class="w-full rounded-xl border border-border bg-background/70 px-3 py-2.5 text-sm text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-safe:transition-shadow"
+                  data-validate="select"
+                >
+                  <option value="">Selecciona una opción</option>
+                  <option value="bodas">Boda</option>
+                  <option value="retratos">Retrato individual</option>
+                  <option value="parejas">Pareja/compromiso</option>
+                  <option value="familia">Familia</option>
+                  <option value="editorial">Editorial/marca</option>
+                </select>
+                <p
+                  class="mt-1 text-xs text-destructive hidden"
+                  data-error-for="contact-session"
+                >
+                  Selecciona el tipo de sesión.
+                </p>
+              </div>
+
+              <div class="space-y-2">
+                <label
+                  for="contact-message"
+                  class="text-sm font-medium text-foreground"
+                >
+                  Mensaje
+                </label>
+                <textarea
+                  id="contact-message"
+                  name="message"
+                  rows={4}
+                  required
+                  class="w-full rounded-xl border border-border bg-background/70 px-3 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-safe:transition-shadow resize-none"
+                  placeholder="Cuéntanos la fecha aproximada, ubicación y cualquier detalle relevante. Si ya tienes un paquete en mente, indícalo aquí."
+                  data-validate="text"></textarea>
+                <p
+                  class="mt-1 text-xs text-destructive hidden"
+                  data-error-for="contact-message"
+                >
+                  El mensaje no puede estar vacío.
+                </p>
+              </div>
+
+              <p
+                id="services-contact-hint"
+                class="text-[11px] text-muted-foreground"
+              >
+                Tus datos se usarán únicamente para responder a tu consulta.
+              </p>
+
+              <div class="pt-2">
+                <Button
+                  type="submit"
+                  fullWidth
+                  rounded="lg"
+                  size="md"
+                  withIcon
+                  iconPosition="right"
+                >
+                  Enviar consulta
+                </Button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
+
+  <script>
+    import type { FieldValidationType } from "../helpers/field-validation";
+    import { validateFieldValue } from "../helpers/field-validation";
+
+    function initFaqAccordion() {
+      const root = document.getElementById("services-page");
+      if (!root) return;
+
+      const triggers = root.querySelectorAll<HTMLElement>("[data-faq-trigger]");
+      const panels = root.querySelectorAll<HTMLElement>("[data-faq-panel]");
+
+      triggers.forEach((trigger) => {
+        trigger.addEventListener("click", () => {
+          const id = trigger.dataset.faqId;
+          if (!id) return;
+
+          const expanded = trigger.getAttribute("aria-expanded") === "true";
+          const nextExpanded = !expanded;
+
+          triggers.forEach((btn) => {
+            const isCurrent = btn.dataset.faqId === id;
+            btn.setAttribute(
+              "aria-expanded",
+              isCurrent && nextExpanded ? "true" : "false"
+            );
+          });
+
+          panels.forEach((panel) => {
+            const isCurrent = panel.dataset.faqId === id;
+            if (!isCurrent) {
+              panel.style.gridTemplateRows = "0fr";
+              panel.style.opacity = "0";
+            } else {
+              panel.style.gridTemplateRows = nextExpanded ? "1fr" : "0fr";
+              panel.style.opacity = nextExpanded ? "1" : "0";
+            }
+          });
+        });
+      });
+    }
+
+    function initContactValidation() {
+      const form = document.getElementById(
+        "services-contact-form"
+      ) as HTMLFormElement | null;
+      if (!form) return;
+
+      const showError = (input: HTMLElement, messageId: string) => {
+        const error = form.querySelector<HTMLElement>(
+          `[data-error-for="${messageId}"]`
+        );
+        if (!error) return;
+
+        if (input.getAttribute("aria-invalid") === "true") {
+          error.classList.remove("hidden");
+        } else {
+          error.classList.add("hidden");
+        }
+      };
+
+      const validateField = (
+        field: HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+      ) => {
+        const type = field.dataset.validate as FieldValidationType | undefined;
+        const isValid = type
+          ? validateFieldValue(field.value, type)
+          : field.value.trim().length > 0;
+
+        field.setAttribute("aria-invalid", isValid ? "false" : "true");
+        showError(field, field.id);
+
+        return isValid;
+      };
+
+      const fields = form.querySelectorAll<
+        HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+      >("[data-validate]");
+
+      fields.forEach((field) => {
+        field.addEventListener("input", () => validateField(field));
+        field.addEventListener("blur", () => validateField(field));
+      });
+
+      form.addEventListener("submit", (event) => {
+        let allValid = true;
+        fields.forEach((field) => {
+          const valid = validateField(field);
+          if (!valid) allValid = false;
+        });
+
+        if (!allValid) {
+          event.preventDefault();
+          const firstInvalid = Array.from(fields).find(
+            (field) => field.getAttribute("aria-invalid") === "true"
+          );
+          firstInvalid?.focus();
+        }
+      });
+    }
+
+    function initServicesPage() {
+      initFaqAccordion();
+      initContactValidation();
+    }
+
+    initServicesPage();
+    document.addEventListener("astro:after-swap", initServicesPage);
+  </script>
 </Layout>

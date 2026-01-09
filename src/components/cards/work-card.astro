@@ -1,0 +1,95 @@
+---
+import type { CollectionEntry } from "astro:content";
+import WorkDialog from "../dialogs/work-dialog.astro";
+
+interface Props {
+  work: CollectionEntry<"gallery">;
+  class?: string;
+  index: number;
+}
+
+const { work, class: className, index } = Astro.props;
+
+const delay = (index + 1) * 200;
+---
+
+<div data-work-card class={className} style={`--motion-delay: ${delay}ms`}>
+  <article
+    class="group relative overflow-hidden rounded-3xl cursor-pointer motion-translate-y-in-100 motion-opacity-in-0 transform-gpu transition-all duration-500 h-full"
+  >
+    <!-- Image Container -->
+    <div class="w-full h-full overflow-hidden">
+      <img
+        src={work.data.image}
+        alt={work.data.title}
+        loading="lazy"
+        decoding="async"
+        class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 group-hover:rotate-1"
+      />
+    </div>
+
+    <!-- Content Overlay -->
+    <div
+      class="absolute inset-0 p-8 flex flex-col justify-end bg-linear-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:backdrop-blur-[2px]"
+    >
+      <div
+        class="translate-y-8 group-hover:translate-y-0 transition-transform duration-500 space-y-3"
+      >
+        <div class="flex items-center gap-3">
+          <span
+            class="px-3 py-1 rounded-full bg-primary/20 backdrop-blur-md border border-primary/30 text-white text-[10px] font-bold uppercase tracking-widest"
+          >
+            {work.data.category}
+          </span>
+          <span
+            class="text-white/60 text-[10px] font-bold uppercase tracking-widest"
+          >
+            {new Date(work.data.date).getFullYear()}
+          </span>
+        </div>
+        <h3
+          class="text-white text-3xl md:text-3xl font-serif font-bold leading-tight"
+        >
+          {work.data.title}
+        </h3>
+        <div
+          class="pt-4 flex items-center gap-2 text-white/80 text-sm font-medium"
+        >
+          <span>Ver detalles</span>
+          <span
+            class="w-10 h-px bg-white/40 transition-all duration-500 group-hover:w-16 group-hover:bg-primary"
+          ></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hover subtle border -->
+    <div
+      class="absolute inset-4 border border-white/10 rounded-2xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+    >
+    </div>
+  </article>
+
+  <WorkDialog work={work} index={index} />
+</div>
+
+<script>
+  function setupWorkCard() {
+    const cards = document.querySelectorAll("[data-work-card]");
+
+    cards.forEach((card) => {
+      const article = card.querySelector("article");
+      const dialog = card.querySelector("dialog") as HTMLDialogElement;
+
+      if (!article || !dialog) return;
+
+      article.addEventListener("click", () => {
+        dialog.showModal();
+        document.body.style.overflow = "hidden";
+      });
+    });
+  }
+
+  setupWorkCard();
+  document.addEventListener("astro:after-swap", setupWorkCard);
+</script>

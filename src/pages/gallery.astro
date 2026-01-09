@@ -1,33 +1,111 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { getCollection } from 'astro:content';
-import { Image } from 'astro:assets';
+import GalleryGrid from "../components/sections/gallery/grid.astro";
+import GalleryHeader from "../components/sections/gallery/header.astro";
+import Layout from "../components/layouts/layout.astro";
 
-const gallery = await getCollection('gallery');
-const categories = ['bodas', 'retratos', 'paisajes', 'editorial'];
+import { getCollection } from "astro:content";
+
+const works = await getCollection("gallery");
+const sortedWorks = works.sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+const categories = [
+  "todos",
+  ...new Set(works.map((work) => work.data.category)),
+];
+
+const categoryLabels: Record<string, string> = {
+  todos: "Todos",
+  bodas: "Bodas",
+  retratos: "Retratos",
+  paisajes: "Paisajes",
+  editorial: "Editorial",
+};
+
+const title = "Galería";
+const description = "Explora nuestra colección de momentos capturados.";
 ---
 
-<Layout title="LensCraft - Galería">
-  <div class="container mx-auto px-4 py-20">
-    <h1 class="font-serif text-4xl md:text-5xl font-bold text-center mb-12">Galería</h1>
-    
-    {/* Filters - Simple implementation */}
-    <div class="flex flex-wrap justify-center gap-4 mb-12">
-      <button class="px-6 py-2 rounded-full border border-border hover:bg-primary hover:text-primary-foreground transition-colors active bg-primary text-primary-foreground">Todos</button>
-      {categories.map(cat => (
-        <button class="px-6 py-2 rounded-full border border-border hover:bg-primary hover:text-primary-foreground transition-colors capitalize">{cat}</button>
-      ))}
+<Layout title={title} description={description}>
+  <section
+    id="gallery-page"
+    class="relative py-28 md:py-32 bg-background overflow-hidden"
+  >
+    <div
+      class="pointer-events-none absolute inset-x-0 -top-40 -z-10 h-80 bg-radial from-primary/15 via-background to-background opacity-80"
+      aria-hidden="true"
+    >
     </div>
 
-    <div class="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
-      {gallery.map(item => (
-        <div class="break-inside-avoid relative group overflow-hidden rounded-lg">
-          <Image src={item.data.image} alt={item.data.title} class="w-full h-auto transition-transform duration-500 group-hover:scale-105" />
-          <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-             <span class="text-white font-serif text-xl">{item.data.title}</span>
-          </div>
-        </div>
-      ))}
+    <div class="container mx-auto px-6 space-y-12 md:space-y-16">
+      <GalleryHeader categories={categories} categoryLabels={categoryLabels} />
+      <GalleryGrid works={sortedWorks} categoryLabels={categoryLabels} />
     </div>
-  </div>
+  </section>
+
+  <script>
+    import { startTransition } from "../helpers/start-transition";
+
+    function initGalleryFiltering() {
+      const root = document.getElementById("gallery-page");
+      if (!root) return;
+
+      const filterButtons = root.querySelectorAll<HTMLElement>("[data-filter]");
+      const items = root.querySelectorAll<HTMLElement>("[data-gallery-item]");
+
+      let currentFilter = "todos";
+
+      const updateFilterButtons = () => {
+        filterButtons.forEach((button) => {
+          const filter = (button as HTMLElement).dataset.filter ?? "todos";
+          button.setAttribute(
+            "aria-pressed",
+            filter === currentFilter ? "true" : "false"
+          );
+        });
+      };
+
+      const applyFilter = (category: string) => {
+        currentFilter = category;
+
+        startTransition(() => {
+          items.forEach((item) => {
+            const itemCategory = item.dataset.category ?? "";
+            const shouldShow =
+              category === "todos" || itemCategory === category;
+
+            // Use data-hidden for the modal navigation to know which items are visible
+            item.dataset.hidden = `${!shouldShow}`;
+
+            if (shouldShow) {
+              item.style.display = "";
+              item.style.opacity = "1";
+              item.style.transform = "scale(1)";
+            } else {
+              item.style.opacity = "0";
+              item.style.transform = "scale(0.95)";
+              setTimeout(() => {
+                if (item.dataset.hidden === "true") item.style.display = "none";
+              }, 300);
+            }
+          });
+
+          updateFilterButtons();
+        });
+      };
+
+      filterButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          applyFilter(button.dataset.filter ?? "todos");
+        });
+      });
+
+      // Initial state
+      applyFilter("todos");
+    }
+
+    initGalleryFiltering();
+    document.addEventListener("astro:after-swap", initGalleryFiltering);
+  </script>
 </Layout>

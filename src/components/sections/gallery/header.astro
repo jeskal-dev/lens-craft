@@ -1,0 +1,57 @@
+---
+import Button from "../../ui/button.astro";
+
+interface Props {
+  categories: string[];
+  categoryLabels: Record<string, string>;
+}
+
+const { categories, categoryLabels } = Astro.props;
+---
+
+<header class="flex flex-col md:flex-row md:items-end justify-between gap-10">
+  <div class="space-y-4 max-w-xl">
+    <p
+      class="inline-flex items-center gap-2 text-primary text-xs font-bold uppercase tracking-[0.2em] motion-translate-x-in--20 motion-opacity-in-0"
+    >
+      <span class="w-8 h-px bg-primary"></span>
+      Portafolio Completo
+    </p>
+    <h1
+      class="text-4xl md:text-5xl lg:text-6xl font-serif font-bold leading-tight text-foreground motion-translate-y-in-50 motion-opacity-in-0"
+    >
+      Momentos que merecen ser
+      <span class="text-primary italic">recordados</span>
+    </h1>
+    <p
+      class="text-sm md:text-base text-muted-foreground leading-relaxed motion-translate-y-in-50 motion-opacity-in-0 motion-delay-150"
+    >
+      Explora una selección cuidada de bodas, retratos editoriales y paisajes
+      que combinan luz, composición y emoción en cada fotografía.
+    </p>
+  </div>
+
+  <div class="space-y-4 md:text-right">
+    <p
+      class="text-xs font-bold uppercase tracking-[0.25em] text-muted-foreground"
+    >
+      Filtrar por categoría
+    </p>
+    <div class="flex flex-wrap md:justify-end gap-2 md:gap-3">
+      {
+        categories.map((category) => (
+          <Button
+            variant="outline"
+            size="sm"
+            rounded="full"
+            class="text-xs md:text-sm aria-pressed:bg-primary aria-pressed:text-primary-foreground aria-pressed:border-primary/60"
+            data-filter={category}
+            aria-pressed={category === "todos" ? "true" : "false"}
+          >
+            {categoryLabels[category] ?? category}
+          </Button>
+        ))
+      }
+    </div>
+  </div>
+</header>

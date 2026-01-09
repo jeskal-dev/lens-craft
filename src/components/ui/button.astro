@@ -1,8 +1,6 @@
 ---
 import type { HTMLAttributes } from "astro/types";
-import SpinnerIcon from "../icons/spinner-icon.astro";
-import ArrowLeftIcon from "../icons/arrow-left-icon.astro";
-import ArrowRightIcon from "../icons/arrow-right-icon.astro";
+import {Icon} from 'astro-icon/components'
 
 interface BaseProps {
   variant?:
@@ -27,23 +25,7 @@ type Props =
       HTMLAttributes<"button">)
   | ({ href: string } & BaseProps & HTMLAttributes<"a">);
 
-// interface Props extends HTMLAttributes<"button"> {
-//   variant?:
-//     | "primary"
-//     | "secondary"
-//     | "accent"
-//     | "destructive"
-//     | "ghost"
-//     | "outline";
-//   size?: "xs" | "sm" | "md" | "lg" | "xl";
-//   withIcon?: boolean;
-//   iconPosition?: "left" | "right";
-//   disabled?: boolean;
-//   loading?: boolean;
-//   fullWidth?: boolean;
-//   rounded?: "sm" | "md" | "lg" | "full";
-//   animation?: "pulse" | "bounce" | "float" | "none";
-// }
+ 
 
 const {
   variant = "primary",
@@ -174,14 +156,13 @@ const getRippleEffect = `
   {...props}
 >
   <!-- Loading Spinner -->
-  {loading && <SpinnerIcon size="sm" />}
+  {loading && <Icon name="lucide:loader-2" class='size-4 animate-spin' />}
 
   <!-- Left Icon -->
   {
     withIcon && iconPosition === "left" && !loading && (
-      <ArrowLeftIcon
-        size="sm"
-        class="group-hover:-translate-x-0.5 motion-safe:transition-transform"
+      <Icon name="lucide:arrow-left" 
+        class="size-4 group-hover:-translate-x-0.5 motion-safe:transition-transform"
       />
     )
   }
@@ -193,9 +174,8 @@ const getRippleEffect = `
   <!-- Right Icon (default) -->
   {
     withIcon && iconPosition === "right" && !loading && (
-      <ArrowRightIcon
-        size="sm"
-        class="group-hover:translate-x-0.5 motion-safe:transition-transform"
+      <Icon  name="lucide:arrow-right"
+        class="size-4 group-hover:translate-x-0.5 motion-safe:transition-transform"
       />
     )
   }
@@ -215,14 +195,13 @@ const getRippleEffect = `
   {...props}
 >
   <!-- Loading Spinner -->
-  {loading && <SpinnerIcon size="sm" />}
+  {loading && <Icon name="lucide:loader-2" class='size-4 animate-spin' />}
 
   <!-- Left Icon -->
   {
     withIcon && iconPosition === "left" && !loading && (
-      <ArrowLeftIcon
-        size="sm"
-        class="group-hover:-translate-x-0.5 motion-safe:transition-transform"
+      <Icon name="lucide:arrow-left" 
+        class="size-4 group-hover:-translate-x-0.5 motion-safe:transition-transform"
       />
     )
   }
@@ -234,9 +213,8 @@ const getRippleEffect = `
   <!-- Right Icon (default) -->
   {
     withIcon && iconPosition === "right" && !loading && (
-      <ArrowRightIcon
-        size="sm"
-        class="group-hover:translate-x-0.5 motion-safe:transition-transform"
+      <Icon name='lucide:arrow-right' 
+        class="size-4 group-hover:translate-x-0.5 motion-safe:transition-transform"
       />
     )
   }
