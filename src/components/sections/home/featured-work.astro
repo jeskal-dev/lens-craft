@@ -11,56 +11,259 @@ const { works } = Astro.props;
 
 // Bento layout mapping for 5 items
 const bentoConfigs = [
-  { class: "md:col-span-8 md:row-span-2 h-[400px] md:h-[664px]" }, // Large featured (2 rows + gap)
-  { class: "md:col-span-4 md:row-span-1 h-[300px] md:h-[320px]" }, // Small top right
-  { class: "md:col-span-4 md:row-span-1 h-[300px] md:h-[320px]" }, // Mid right below small
-  { class: "md:col-span-6 md:row-span-1 h-[350px] md:h-[350px]" }, // Bottom left
-  { class: "md:col-span-6 md:row-span-1 h-[350px] md:h-[350px]" }, // Bottom right
+  {
+    class:
+      "md:col-span-8 md:row-span-2 h-[400px] md:h-[664px] motion-scale-in-95 motion-opacity-in-0",
+  },
+  {
+    class:
+      "md:col-span-4 md:row-span-1 h-[300px] md:h-[320px] motion-translate-x-in--50 motion-opacity-in-0",
+  },
+  {
+    class:
+      "md:col-span-4 md:row-span-1 h-[300px] md:h-[320px] motion-translate-x-in-50 motion-opacity-in-0",
+  },
+  {
+    class:
+      "md:col-span-6 md:row-span-1 h-[350px] md:h-[350px] motion-translate-y-in-50 motion-opacity-in-0",
+  },
+  {
+    class:
+      "md:col-span-6 md:row-span-1 h-[350px] md:h-[350px] motion-translate-y-in-50 motion-opacity-in-0",
+  },
 ];
 ---
 
-<section class="py-32 bg-background relative overflow-hidden">
+<section
+  class="py-32 bg-background relative overflow-hidden"
+  data-featured-section
+>
+  <!-- Elemento decorativo de fondo -->
+  <div
+    class="absolute inset-0 bg-linear-to-b from-transparent via-primary/5 to-transparent -z-10 motion-opacity-in-0 motion-duration-2000"
+  >
+  </div>
+
   <div class="container mx-auto px-6 relative z-10">
-    <!-- Section Header -->
+    <!-- Section Header con animaciones escalonadas -->
     <div
       class="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8"
     >
       <div class="max-w-xl space-y-4">
         <div
-          class="inline-flex items-center gap-2 text-primary text-xs font-bold uppercase tracking-[0.2em] motion-translate-x-in--20 motion-opacity-in-0"
+          id="featured-work-label"
+          class="inline-flex items-center gap-2 text-primary text-xs font-bold uppercase tracking-[0.2em] motion-translate-x-in--20 motion-opacity-in-0 motion-duration-1000"
         >
-          <span class="w-8 h-px bg-primary"></span>
+          <span
+            class="w-8 h-px bg-primary motion-scale-x-in-0 motion-duration-1000"
+          ></span>
           Portafolio Seleccionado
         </div>
         <h2
-          class="text-4xl md:text-6xl font-serif font-bold text-foreground leading-tight motion-translate-y-in-50 motion-opacity-in-0"
+          id="featured-work-title"
+          class="text-4xl md:text-6xl font-serif font-bold text-foreground leading-tight motion-translate-y-in-50 motion-opacity-in-0 motion-duration-1200 motion-delay-200"
         >
-          Historias que merecen ser <span class="text-primary italic"
+          Historias que merecen ser <span
+            class="text-primary italic motion-hue-rotate-in-180 motion-duration-2000"
             >Inmortalizadas</span
           >
         </h2>
       </div>
-      <div class="motion-opacity-in-0 motion-delay-500">
+      <div
+        class="motion-translate-y-in-50 motion-opacity-in-0 motion-duration-1000 motion-delay-400"
+      >
         <Button
           href="/gallery"
           variant="outline"
           rounded="full"
           withIcon
           iconPosition="right"
+          class="motion-scale-in-95"
         >
           Explorar Todo
         </Button>
       </div>
     </div>
 
-    <!-- Bento Gallery Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6">
+    <!-- Bento Gallery Grid con animaciones secuenciales -->
+    <div
+      id="bento-grid"
+      class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 motion-blur-in motion-duration-1000"
+    >
       {
-        works.map((work, index) => {
+        works.slice(0, 5).map((work, index) => {
           const config = bentoConfigs[index % bentoConfigs.length];
-          return <WorkCard work={work} index={index} class={config.class} />;
+          return (
+            <WorkCard
+              work={work}
+              index={index}
+              class={`${config.class} motion-delay-${(index + 1) * 200}`}
+            />
+          );
         })
       }
     </div>
+
+    <!-- Stats adicionales con animación -->
+    <div class="mt-20 pt-10 border-t border-border/30">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        <div
+          class="motion-translate-y-in-30 motion-opacity-in-0 motion-duration-800 motion-delay-600"
+        >
+          <p class="text-4xl font-serif font-bold text-primary">98%</p>
+          <p
+            class="text-sm text-muted-foreground uppercase tracking-wider mt-2"
+          >
+            Satisfacción Clientes
+          </p>
+        </div>
+        <div
+          class="motion-translate-y-in-30 motion-opacity-in-0 motion-duration-800 motion-delay-700"
+        >
+          <p class="text-4xl font-serif font-bold text-primary">24h</p>
+          <p
+            class="text-sm text-muted-foreground uppercase tracking-wider mt-2"
+          >
+            Entrega Previa
+          </p>
+        </div>
+        <div
+          class="motion-translate-y-in-30 motion-opacity-in-0 motion-duration-800 motion-delay-800"
+        >
+          <p class="text-4xl font-serif font-bold text-primary">4K</p>
+          <p
+            class="text-sm text-muted-foreground uppercase tracking-wider mt-2"
+          >
+            Resolución Máxima
+          </p>
+        </div>
+        <div
+          class="motion-translate-y-in-30 motion-opacity-in-0 motion-duration-800 motion-delay-900"
+        >
+          <p class="text-4xl font-serif font-bold text-primary">100%</p>
+          <p
+            class="text-sm text-muted-foreground uppercase tracking-wider mt-2"
+          >
+            Personalizado
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
+
+<script>
+  // Animaciones inView para la sección completa
+  function setupFeaturedWorkAnimations() {
+    const section = document.querySelector("[data-featured-section]");
+    if (!section) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Activar animaciones principales
+            const label = document.getElementById("featured-work-label");
+            const title = document.getElementById("featured-work-title");
+            const grid = document.getElementById("bento-grid");
+
+            if (label) label.classList.add("motion-active");
+            if (title) title.classList.add("motion-active");
+
+            // Activar animaciones de grid con retraso
+            setTimeout(() => {
+              if (grid) grid.classList.add("motion-active");
+
+              // Activar elementos de stats
+              const stats = section.querySelectorAll(
+                '[class*="motion-translate-y-in-30"]'
+              );
+              stats.forEach((stat, index) => {
+                setTimeout(() => {
+                  stat.classList.add("motion-active");
+                }, index * 100);
+              });
+            }, 500);
+
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.2,
+        rootMargin: "0px 0px -100px 0px",
+      }
+    );
+
+    observer.observe(section);
+  }
+
+  // Optimización de recursos
+  function optimizeFeaturedSection() {
+    const section = document.querySelector("[data-featured-section]");
+    if (!section) return;
+
+    // Lazy load imágenes fuera del viewport inicial
+    const images = section.querySelectorAll("img");
+    images.forEach((img, index) => {
+      if (index > 2) {
+        img.loading = "lazy";
+      }
+    });
+
+    // Preconectar a dominios de imágenes si es necesario
+    const preconnect = document.createElement("link");
+    preconnect.rel = "preconnect";
+    preconnect.href = "https://images.unsplash.com";
+    preconnect.crossOrigin = "anonymous";
+    document.head.appendChild(preconnect);
+  }
+
+  // Inicializar
+  document.addEventListener("DOMContentLoaded", () => {
+    setupFeaturedWorkAnimations();
+    optimizeFeaturedSection();
+  });
+
+  document.addEventListener("astro:after-swap", () => {
+    setTimeout(() => {
+      setupFeaturedWorkAnimations();
+      optimizeFeaturedSection();
+    }, 100);
+  });
+</script>
+
+<style>
+  /* Animaciones específicas para featured work */
+  #featured-work-title .motion-hue-rotate-in-180 {
+    animation: hueRotate 3s ease-in-out;
+  }
+
+  @keyframes hueRotate {
+    0% {
+      filter: hue-rotate(0deg);
+    }
+    50% {
+      filter: hue-rotate(180deg);
+    }
+    100% {
+      filter: hue-rotate(0deg);
+    }
+  }
+
+  /* Scroll-driven animations */
+  @supports (animation-timeline: view()) {
+    [data-featured-section] {
+      animation-timeline: view();
+      animation-range: entry 25% cover 30%;
+    }
+  }
+
+  /* Preferencias de movimiento reducido */
+  @media (prefers-reduced-motion: reduce) {
+    .motion-active {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+</style>

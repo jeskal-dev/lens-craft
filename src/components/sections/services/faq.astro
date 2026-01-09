@@ -1,0 +1,232 @@
+---
+import { Icon } from "astro-icon/components";
+
+const faqs = [
+  {
+    question: "¿Cómo reservo una sesión?",
+    answer:
+      "Completa el formulario indicando el tipo de sesión y la fecha aproximada. Te responderemos en menos de 24 horas con la disponibilidad y los siguientes pasos.",
+  },
+  {
+    question: "¿Cuánto tarda en entregarse el material?",
+    answer:
+      "El plazo habitual de entrega es de 2 a 4 semanas según el tipo de sesión y el volumen de edición requerido. Siempre recibirás una fecha estimada al confirmar la reserva.",
+  },
+  {
+    question: "¿Puedo personalizar un paquete?",
+    answer:
+      "Sí. Los paquetes sirven como base, pero podemos ajustar duración, ubicaciones y extras para adaptarlos a lo que necesitas.",
+  },
+  {
+    question: "¿Trabajas fuera de tu ciudad?",
+    answer:
+      "Sí, realizamos sesiones en otras ciudades y destinos. Los costos de desplazamiento se calculan en función de la ubicación y se detallan antes de la reserva.",
+  },
+];
+---
+
+<section
+  aria-labelledby="faq-heading"
+  class="py-16 md:py-24 bg-linear-to-b from-background via-background/95 to-background/90"
+>
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
+    <!-- Header mejorado -->
+    <div class="text-center mb-12 md:mb-16">
+      <div class="inline-flex items-center justify-center gap-3 mb-4">
+        <div
+          class="w-12 h-px bg-linear-to-r from-transparent via-primary/50 to-transparent"
+        >
+        </div>
+        <span
+          class="text-xs font-semibold tracking-widest text-primary uppercase"
+        >
+          FAQ
+        </span>
+        <div
+          class="w-12 h-px bg-linear-to-r from-transparent via-primary/50 to-transparent"
+        >
+        </div>
+      </div>
+      <h2
+        id="faq-heading"
+        class="text-3xl md:text-5xl font-serif font-bold text-foreground mb-4"
+      >
+        Preguntas Frecuentes
+      </h2>
+      <p class="text-muted-foreground text-lg max-w-2xl mx-auto">
+        Todo lo que necesitas saber antes de reservar tu sesión
+      </p>
+    </div>
+
+    <!-- Contenedor de preguntas mejorado -->
+    <div class="space-y-4" role="list">
+      {
+        faqs.map((faq, index) => {
+          const panelId = `faq-panel-${index}`;
+          const buttonId = `faq-trigger-${index}`;
+
+          return (
+            <div class="group relative" role="listitem">
+              {/* Efecto de fondo sutil al hacer hover */}
+              <div class="absolute inset-0 bg-linear-to-r from-primary/5 via-transparent to-primary/5 opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-300" />
+
+              <div class="relative border border-border/40 bg-card/60 backdrop-blur-sm rounded-2xl overflow-hidden transition-all duration-300 hover:border-border/60 hover:shadow-lg hover:shadow-primary/5">
+                <button
+                  id={buttonId}
+                  type="button"
+                  class="w-full flex items-center justify-between gap-4 px-6 md:px-8 py-5 md:py-6 text-left group/btn"
+                  aria-expanded="false"
+                  aria-controls={panelId}
+                  data-faq-trigger
+                  data-faq-id={String(index)}
+                >
+                  <div class="flex items-start gap-4 flex-1">
+                    {/* Número decorativo */}
+                    <div class="shrink-0 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                      <span class="text-sm font-semibold text-primary">
+                        {index + 1}
+                      </span>
+                    </div>
+
+                    {/* Pregunta */}
+                    <div class="flex-1">
+                      <h3 class="text-lg md:text-xl font-medium text-foreground group-hover/btn:text-primary transition-colors">
+                        {faq.question}
+                      </h3>
+                    </div>
+                  </div>
+
+                  {/* Ícono animado */}
+                  <div class="shrink-0">
+                    <div class="w-10 h-10 rounded-full border border-border/50 bg-background/50 flex items-center justify-center group-data-[state=open]/btn:bg-primary/10 group-data-[state=open]/btn:border-primary/30 transition-all duration-300">
+                      <Icon
+                        name="lucide:plus"
+                        class="w-5 h-5 text-muted-foreground group-data-[state=open]/btn:text-primary group-data-[state=open]/btn:rotate-45 transition-all duration-300"
+                        data-faq-icon
+                      />
+                    </div>
+                  </div>
+                </button>
+
+                {/* Respuesta con animación mejorada */}
+                <div
+                  id={panelId}
+                  role="region"
+                  aria-labelledby={buttonId}
+                  data-faq-panel
+                  data-faq-id={String(index)}
+                  class="grid overflow-hidden transition-[grid-template-rows] duration-500 ease-out"
+                  style="grid-template-rows: 0fr;"
+                >
+                  <div class="min-h-0 overflow-hidden">
+                    <div class="px-6 md:px-8 pb-6 md:pb-8">
+                      <div class="pl-12 border-l-2 border-primary/20">
+                        <p class="text-muted-foreground leading-relaxed text-base md:text-lg">
+                          {faq.answer}
+                        </p>
+                        {/* Separador decorativo */}
+                        <div class="mt-6 pt-6 border-t border-border/30">
+                          <p class="text-sm text-muted-foreground/60">
+                            ¿Tienes más preguntas?{" "}
+                            <a
+                              href="/contact"
+                              class="text-primary font-medium hover:underline"
+                            >
+                              Contáctanos directamente
+                            </a>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })
+      }
+    </div>
+
+    {/* CTA adicional */}
+    <div class="mt-12 text-center">
+      <p class="text-muted-foreground mb-6">¿No encontraste lo que buscabas?</p>
+      <a
+        href="/contact"
+        class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-medium rounded-full hover:bg-primary/90 transition-colors group"
+      >
+        <span>Contactar ahora</span>
+        <Icon
+          name="lucide:arrow-right"
+          class="w-4 h-4 group-hover:translate-x-1 transition-transform"
+        />
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  function initFaqAccordion() {
+    const triggers =
+      document.querySelectorAll<HTMLElement>("[data-faq-trigger]");
+    const panels = document.querySelectorAll<HTMLElement>("[data-faq-panel]");
+
+    // Configuración inicial - todos cerrados
+    triggers.forEach((trigger, index) => {
+      if (index !== 0) {
+        trigger.setAttribute("aria-expanded", "false");
+        trigger.setAttribute("data-state", "closed");
+      } else {
+        trigger.setAttribute("aria-expanded", "true");
+        trigger.setAttribute("data-state", "open");
+        panels[0].style.gridTemplateRows = "1fr";
+      }
+    });
+
+    triggers.forEach((trigger) => {
+      trigger.addEventListener("click", () => {
+        const id = trigger.dataset.faqId;
+        if (!id) return;
+
+        const isExpanded = trigger.getAttribute("aria-expanded") === "true";
+        const nextState = !isExpanded;
+
+        // Actualizar el trigger clickeado
+        trigger.setAttribute("aria-expanded", `${nextState}`);
+        trigger.setAttribute("data-state", nextState ? "open" : "closed");
+
+        // Encontrar y actualizar el panel correspondiente
+        const panel = document.querySelector<HTMLElement>(
+          `[data-faq-panel][data-faq-id="${id}"]`
+        );
+        if (panel) {
+          panel.style.gridTemplateRows = nextState ? "1fr" : "0fr";
+
+          // Opcional: cerrar otros paneles para acordeón
+          panels.forEach((p) => {
+            if (p !== panel) {
+              p.style.gridTemplateRows = "0fr";
+              const otherId = p.dataset.faqId;
+              const otherTrigger = document.querySelector(
+                `[data-faq-trigger][data-faq-id="${otherId}"]`
+              );
+              if (otherTrigger) {
+                otherTrigger.setAttribute("aria-expanded", "false");
+                otherTrigger.setAttribute("data-state", "closed");
+              }
+            }
+          });
+        }
+      });
+    });
+  }
+
+  // Inicializar cuando el DOM esté listo
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initFaqAccordion);
+  } else {
+    initFaqAccordion();
+  }
+
+  // Reinicializar después de navegación Astro
+  document.addEventListener("astro:after-swap", initFaqAccordion);
+</script>

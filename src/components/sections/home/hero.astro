@@ -4,7 +4,7 @@ import Button from "../../ui/button.astro";
 ---
 
 <section
-  class="relative h-dvh flex items-center pt-28 md:pt-32 pb-12 overflow-hidden bg-background"
+  class="relative h-dvh flex items-center pb-12 overflow-hidden bg-background pt-28 md:pt-32"
 >
   <!-- Background Decorative skew -->
   <div
@@ -95,44 +95,64 @@ import Button from "../../ui/button.astro";
       </div>
     </div>
 
-    <!-- Right Column: Compact Image Collage -->
+    <!-- Right Column: Enhanced Image Collage -->
     <div
-      class="relative flex items-center justify-center h-80 lg:h-140 mt-8 lg:mt-0"
+      class="relative flex items-center justify-center h-112 lg:h-160 mt-8 lg:mt-0"
     >
-      <!-- Main Image -->
+      <!-- Main Image - Optimized -->
       <div
-        class="relative z-10 w-full max-w-80 aspect-4/5 rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl transition-all duration-700 motion-scale-in-90 motion-opacity-in-0 motion-duration-1000 motion-delay-300 transform-gpu hover:scale-[1.02]"
+        class="relative z-10 w-full max-w-sm lg:max-w-md xl:max-w-lg aspect-4/5 rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl transition-all duration-700 motion-scale-in-90 motion-opacity-in-0 motion-duration-1000 motion-delay-300 transform-gpu hover:scale-[1.02]"
       >
         <img
-          src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?q=80&w=2070&auto=format&fit=crop"
-          alt="Fotografía Principal"
+          src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?q=80&w=1200&auto=format&fit=crop"
+          alt="Fotografía Principal - Retrato cinematográfico de pareja"
           class="w-full h-full object-cover"
+          width="1200"
+          height="1500"
+          loading="eager"
+          decoding="async"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          srcset="
+            https://images.unsplash.com/photo-1542038784456-1ea8e935640e?q=80&w=400&auto=format&fit=crop 400w,
+            https://images.unsplash.com/photo-1542038784456-1ea8e935640e?q=80&w=800&auto=format&fit=crop 800w,
+            https://images.unsplash.com/photo-1542038784456-1ea8e935640e?q=80&w=1200&auto=format&fit=crop 1200w
+          "
         />
         <div
-          class="absolute inset-0 bg-linear-to-t from-black/50 to-transparent"
+          class="absolute inset-0 bg-linear-to-t from-black/30 via-transparent to-transparent"
         >
         </div>
       </div>
 
-      <!-- Floating Small Detail -->
+      <!-- Floating Small Detail - Optimized -->
       <div
-        class="absolute -top-6 -right-2 md:-right-8 w-32 md:w-44 aspect-square rounded-xl overflow-hidden shadow-xl border-4 border-background z-20 motion-translate-y-in--50 motion-opacity-in-0 motion-duration-1000 motion-delay-500 hidden sm:block rotate-2"
+        class="absolute -top-8 -right-4 md:-right-12 w-40 md:w-56 aspect-square rounded-xl overflow-hidden shadow-2xl border-4 border-background z-20 motion-translate-y-in--50 motion-opacity-in-0 motion-duration-1000 motion-delay-500 hidden sm:block rotate-3"
       >
         <img
-          src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop"
-          alt="Detalle"
+          src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop"
+          alt="Detalle fotográfico - Momento íntimo capturado"
           class="w-full h-full object-cover"
+          width="800"
+          height="800"
+          loading="lazy"
+          decoding="async"
+          sizes="(max-width: 768px) 140px, 224px"
         />
       </div>
 
-      <!-- Floating Bottom Overlay -->
+      <!-- Floating Bottom Overlay - Optimized -->
       <div
-        class="absolute -bottom-6 -left-2 md:-left-8 w-44 md:w-60 aspect-video rounded-xl overflow-hidden shadow-xl border-4 border-background z-20 motion-translate-y-in-50 motion-opacity-in-0 motion-duration-1000 motion-delay-700 hidden sm:block -rotate-2"
+        class="absolute -bottom-8 -left-4 md:-left-12 w-52 md:w-72 aspect-video rounded-xl overflow-hidden shadow-2xl border-4 border-background z-20 motion-translate-y-in-50 motion-opacity-in-0 motion-duration-1000 motion-delay-700 hidden sm:block -rotate-3"
       >
         <img
-          src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2070&auto=format&fit=crop"
-          alt="Contexto"
+          src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1000&auto=format&fit=crop"
+          alt="Contexto paisajístico - Escenario natural para bodas"
           class="w-full h-full object-cover"
+          width="1000"
+          height="667"
+          loading="lazy"
+          decoding="async"
+          sizes="(max-width: 768px) 208px, 288px"
         />
       </div>
 

@@ -13,9 +13,11 @@ const featuredWorks = await getCollection("gallery", ({ data }) => {
 const sortedWorks = featuredWorks
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 5);
+
+const title = "Inicio";
 ---
 
-<Layout title="Inicio">
+<Layout title={title}>
   <HomeHero />
   <HomeFeaturedWork works={sortedWorks} />
   <HomePhilosophy />

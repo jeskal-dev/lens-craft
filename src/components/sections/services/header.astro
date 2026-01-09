@@ -1,0 +1,209 @@
+---
+import { Icon } from "astro-icon/components";
+import Button from "../../ui/button.astro";
+---
+
+<section
+  class="relative min-h-[90vh] flex items-center overflow-hidden pb-24 pt-28 md:pt-32"
+>
+  <!-- Fondo con imagen y degradado -->
+  <div class="absolute inset-0 z-0">
+    <div
+      class="absolute inset-0 bg-linear-to-r from-background via-background/95 to-background/80 z-10"
+    >
+    </div>
+    <div
+      class="absolute inset-0 bg-linear-to-t from-background via-transparent to-transparent z-10"
+    >
+    </div>
+    <img
+      src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1920&auto=format&fit=crop"
+      alt="Equipo fotográfico profesional"
+      loading="eager"
+      decoding="async"
+      class="w-full h-full object-cover object-[center_30%] opacity-90"
+    />
+  </div>
+
+  <!-- Contenido principal -->
+  <div class="container mx-auto px-6 relative z-20">
+    <div class="max-w-2xl">
+      <!-- Badge destacado -->
+      <div
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs md:text-sm font-bold uppercase tracking-[0.3em] mb-8 motion-translate-y-in-20 motion-opacity-in-0 motion-duration-700"
+      >
+        <Icon name="lucide:sparkles" class="w-4 h-4" />
+        <span>Servicios fotográficos profesionales</span>
+      </div>
+
+      <!-- Título principal -->
+      <div class="space-y-6 mb-10">
+        <h1
+          class="text-5xl md:text-6xl lg:text-7xl font-serif font-bold tracking-tight leading-[1.05] text-foreground motion-translate-y-in-30 motion-opacity-in-0 motion-duration-800"
+        >
+          Historias capturadas
+          <span class="block text-primary italic mt-2"
+            >con emoción y detalle.</span
+          >
+        </h1>
+        <p
+          class="text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed motion-translate-y-in-30 motion-opacity-in-0 motion-duration-800 motion-delay-150"
+        >
+          Cada momento es único. Diseñamos experiencias fotográficas
+          personalizadas que preservan la autenticidad de tus recuerdos más
+          preciados.
+        </p>
+      </div>
+
+      <!-- CTA Buttons -->
+      <div
+        class="flex flex-wrap gap-4 items-center mb-12 motion-translate-y-in-30 motion-opacity-in-0 motion-duration-800 motion-delay-250"
+      >
+        <Button
+          href="/contact"
+          size="lg"
+          rounded="full"
+          withIcon
+          iconPosition="right"
+          class="shadow-lg shadow-primary/20"
+        >
+          Solicitar presupuesto
+        </Button>
+        <Button
+          href="/gallery"
+          variant="outline"
+          size="lg"
+          rounded="full"
+          class="bg-background/80 backdrop-blur-sm"
+        >
+          Ver trabajos
+        </Button>
+        <p class="text-sm text-muted-foreground/90">
+          <Icon name="lucide:clock" class="w-4 h-4 inline mr-1" />
+          Respuesta en menos de 24 horas
+        </p>
+      </div>
+
+      <!-- Estadísticas destacadas -->
+      <div
+        class="grid grid-cols-2 md:grid-cols-3 gap-6 pt-8 border-t border-border/40 max-w-xl motion-opacity-in-0 motion-duration-800 motion-delay-350"
+      >
+        <div class="text-center md:text-left">
+          <dd class="text-3xl font-serif font-bold text-foreground mb-1">
+            300+
+          </dd>
+          <dt
+            class="text-xs font-bold uppercase tracking-widest text-muted-foreground"
+          >
+            Sesiones entregadas
+          </dt>
+        </div>
+        <div class="text-center md:text-left">
+          <dd class="text-3xl font-serif font-bold text-foreground mb-1">
+            98%
+          </dd>
+          <dt
+            class="text-xs font-bold uppercase tracking-widest text-muted-foreground"
+          >
+            Clientes felices
+          </dt>
+        </div>
+        <div class="text-center md:text-left">
+          <dd class="text-3xl font-serif font-bold text-foreground mb-1">
+            3 semanas
+          </dd>
+          <dt
+            class="text-xs font-bold uppercase tracking-widest text-muted-foreground"
+          >
+            Entrega promedio
+          </dt>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tarjeta flotante con información del workflow -->
+    <div
+      class="absolute right-6 bottom-6 hidden lg:block w-80 bg-background/90 backdrop-blur-md border border-white/10 rounded-2xl p-6 shadow-2xl motion-scale-in-95 motion-opacity-in-0 motion-duration-800 motion-delay-400"
+    >
+      <div class="flex items-center gap-3 mb-4">
+        <div
+          class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center border border-primary/20"
+        >
+          <Icon name="lucide:aperture" class="w-6 h-6 text-primary" />
+        </div>
+        <div>
+          <p class="text-xs text-muted-foreground uppercase tracking-wide">
+            Workflow profesional
+          </p>
+          <p class="text-sm text-foreground font-medium">
+            Proceso optimizado en 4 fases
+          </p>
+        </div>
+      </div>
+
+      <div class="space-y-4">
+        <div class="flex items-start gap-3">
+          <div
+            class="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center shrink-0 mt-0.5"
+          >
+            <span class="text-xs font-bold text-primary">1</span>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-foreground">
+              Briefing personalizado
+            </p>
+            <p class="text-xs text-muted-foreground">
+              Análisis de necesidades y planificación
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3">
+          <div
+            class="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center shrink-0 mt-0.5"
+          >
+            <span class="text-xs font-bold text-primary">2</span>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-foreground">
+              Sesión fotográfica
+            </p>
+            <p class="text-xs text-muted-foreground">
+              Dirección creativa y captura profesional
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3">
+          <div
+            class="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center shrink-0 mt-0.5"
+          >
+            <span class="text-xs font-bold text-primary">3</span>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-foreground">
+              Edición especializada
+            </p>
+            <p class="text-xs text-muted-foreground">
+              Retoque y procesamiento de calidad
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3">
+          <div
+            class="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center shrink-0 mt-0.5"
+          >
+            <span class="text-xs font-bold text-primary">4</span>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-foreground">Entrega digital</p>
+            <p class="text-xs text-muted-foreground">
+              Galería online y descarga en alta resolución
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
