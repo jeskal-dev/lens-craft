@@ -1,5 +1,14 @@
 ---
 import Layout from "../components/layouts/layout.astro";
+import ContactHero from "../components/sections/contact/contact-hero.astro";
+import ContactLocation from "../components/sections/contact/contact-location.astro";
+
+const title = "Contacto";
+const description =
+  "Contacta con LensCraft para reservas, presupuestos y colaboraciones fotográficas.";
 ---
 
-<Layout title="Contacto" />
+<Layout title={title} description={description}>
+  <ContactHero />
+  <ContactLocation />
+</Layout>

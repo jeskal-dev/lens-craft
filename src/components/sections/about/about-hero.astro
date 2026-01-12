@@ -1,0 +1,241 @@
+---
+import { Icon } from "astro-icon/components";
+import Button from "../../ui/button.astro";
+---
+
+<section
+  id="about-hero"
+  class="relative pt-24 md:pt-32 pb-16 md:pb-24 bg-background overflow-hidden"
+  aria-labelledby="about-heading"
+>
+  <!-- Fondo dinámico -->
+  <div class="absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
+    <div
+      class="absolute top-20 -left-20 w-64 h-64 bg-primary/8 rounded-full blur-3xl"
+    >
+    </div>
+    <div
+      class="absolute bottom-40 -right-20 w-48 h-48 bg-primary/5 rounded-full blur-2xl"
+    >
+    </div>
+  </div>
+
+  <div class="container mx-auto px-4 sm:px-6">
+    <div class="grid lg:grid-cols-[1fr_0.9fr] gap-10 lg:gap-12 items-start">
+      <!-- Columna izquierda: Contenido principal -->
+      <div class="space-y-8 max-w-2xl">
+        <!-- Badge -->
+        <div
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-linear-to-r from-primary/10 to-primary/5 border border-primary/20 text-primary text-xs md:text-sm font-semibold uppercase tracking-[0.2em] motion-translate-y-in-20 motion-opacity-in-0 motion-duration-600"
+        >
+          <Icon name="lucide:camera" class="w-4 h-4" />
+          <span>Visión del fotógrafo</span>
+        </div>
+
+        <!-- Título y descripción -->
+        <header class="space-y-6">
+          <h1
+            id="about-heading"
+            class="text-4xl md:text-5xl lg:text-6xl font-serif font-bold tracking-tight leading-[1.08] text-foreground"
+          >
+            Narrativa visual
+            <span class="block text-primary mt-2">
+              al servicio de tus historias.
+            </span>
+          </h1>
+
+          <p class="text-base md:text-lg text-muted-foreground leading-relaxed">
+            LensCraft nace de la obsesión por capturar lo irrepetible. Combino
+            una mirada cinematográfica con un enfoque íntimo y humano para
+            transformar tus momentos en recuerdos visuales que perduran.
+          </p>
+        </header>
+
+        <!-- Estadísticas compactas -->
+        <div
+          class="grid grid-cols-3 gap-6 pt-6 border-t border-border/30"
+          aria-label="Métricas del fotógrafo"
+        >
+          <div class="text-center">
+            <p
+              class="text-3xl md:text-4xl font-serif font-bold text-primary mb-1"
+            >
+              10+
+            </p>
+            <p
+              class="text-xs font-medium uppercase tracking-wider text-muted-foreground"
+            >
+              Años
+            </p>
+          </div>
+          <div class="text-center">
+            <p
+              class="text-3xl md:text-4xl font-serif font-bold text-primary mb-1"
+            >
+              200+
+            </p>
+            <p
+              class="text-xs font-medium uppercase tracking-wider text-muted-foreground"
+            >
+              Historias
+            </p>
+          </div>
+          <div class="text-center">
+            <p
+              class="text-3xl md:text-4xl font-serif font-bold text-primary mb-1"
+            >
+              25+
+            </p>
+            <p
+              class="text-xs font-medium uppercase tracking-wider text-muted-foreground"
+            >
+              Premios
+            </p>
+          </div>
+        </div>
+
+        <!-- Botones -->
+        <div class="flex flex-wrap gap-3 md:gap-4 items-center pt-4">
+          <Button
+            href="/gallery"
+            size="lg"
+            rounded="full"
+            withIcon
+            iconPosition="right"
+            class="bg-primary hover:bg-primary/90 shadow-lg hover:shadow-primary/25"
+          >
+            Ver portafolio
+            <Icon name="lucide:arrow-right" class="w-5 h-5 ml-2" />
+          </Button>
+
+          <Button
+            href="/services"
+            variant="outline"
+            size="lg"
+            rounded="full"
+            class="border-border hover:border-primary hover:bg-primary/5"
+          >
+            <Icon name="lucide:sparkle" class="w-4 h-4 mr-2" />
+            Servicios
+          </Button>
+        </div>
+      </div>
+
+      <!-- Columna derecha: Imagen mejorada - Compacta y estratégica -->
+      <div class="relative lg:pt-12">
+        <div class="flex flex-col items-center lg:items-start">
+          <!-- Contenedor principal de imagen - Tamaño reducido -->
+          <div class="relative w-full max-w-sm mx-auto">
+            <!-- Marco decorativo sutil -->
+            <div
+              class="absolute -inset-3 rounded-2xl bg-linear-to-br from-primary/10 via-transparent to-transparent -z-10 opacity-70"
+            >
+            </div>
+
+            <!-- Imagen principal - Proporción más equilibrada -->
+            <div
+              class="relative aspect-4/5 rounded-xl overflow-hidden shadow-xl border border-white/10 bg-background"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1516031190212-da133013de50?q=80&w=800&auto=format&fit=crop"
+                alt="Fotógrafo profesional trabajando con cámara"
+                class="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                loading="eager"
+                width="600"
+                height="750"
+              />
+
+              <!-- Overlay sutil -->
+              <div
+                class="absolute inset-0 bg-linear-to-t from-black/20 via-transparent to-transparent"
+              >
+              </div>
+            </div>
+
+            <!-- Elemento decorativo flotante - Posición más discreta -->
+            <div
+              class="absolute -top-4 -right-4 w-28 bg-background/95 backdrop-blur-md border border-white/10 rounded-lg p-3 shadow-lg"
+            >
+              <div class="flex items-center gap-1.5 mb-1">
+                <Icon name="lucide:award" class="w-3 h-3 text-primary" />
+                <span
+                  class="text-[9px] font-bold uppercase tracking-widest text-primary"
+                >
+                  Reconocido
+                </span>
+              </div>
+              <p class="text-xs font-medium text-foreground leading-tight">
+                Premios internacionales
+              </p>
+            </div>
+
+            <!-- Tarjeta informativa - Posición inferior y compacta -->
+            <div
+              class="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-11/12 max-w-xs bg-background/90 backdrop-blur-sm border border-white/10 rounded-lg p-3 shadow-lg"
+            >
+              <div class="flex items-center justify-between gap-3">
+                <div class="flex items-center gap-2">
+                  <Icon
+                    name="lucide:map-pin"
+                    class="w-3.5 h-3.5 text-primary"
+                  />
+                  <div>
+                    <p class="text-xs font-semibold text-foreground">
+                      España & Internacional
+                    </p>
+                    <p class="text-[10px] text-muted-foreground">
+                      Cobertura disponible
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-1">
+                  <div
+                    class="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse"
+                  >
+                  </div>
+                  <span class="text-[10px] font-medium text-muted-foreground"
+                    >Disponible</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cita o testimonio debajo de la imagen -->
+          <div class="mt-8 max-w-sm text-center lg:text-left">
+            <div
+              class="flex items-center justify-center lg:justify-start gap-2 mb-3"
+            >
+              <Icon name="lucide:quote" class="w-5 h-5 text-primary/60" />
+              <span class="text-sm font-medium text-foreground"
+                >Filosofía de trabajo</span
+              >
+            </div>
+            <blockquote class="text-sm text-muted-foreground italic">
+              "Cada sesión es una colaboración única. Mi objetivo es capturar la
+              esencia auténtica, no solo una pose."
+            </blockquote>
+            <div
+              class="flex items-center justify-center lg:justify-start gap-2 mt-4"
+            >
+              <div
+                class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center"
+              >
+                <Icon name="lucide:camera" class="w-3 h-3 text-primary" />
+              </div>
+              <span class="text-xs font-medium text-foreground"
+                >Enfoque documental</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Elemento decorativo sutil -->
+        <div
+          class="absolute -left-4 top-1/3 w-16 h-16 rounded-full border border-primary/5 -z-10"
+        >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

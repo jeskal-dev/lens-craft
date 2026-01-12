@@ -1,5 +1,16 @@
 ---
 import Layout from "../components/layouts/layout.astro";
+import AboutHero from "../components/sections/about/about-hero.astro";
+import AboutGear from "../components/sections/about/about-gear.astro";
+import AboutProcess from "../components/sections/about/about-process.astro";
+
+const title = "Sobre Mí";
+const description =
+  "Conoce la historia, filosofía y equipo detrás del proyecto fotográfico LensCraft.";
 ---
 
-<Layout title="Sobre mi" />
+<Layout title={title} description={description}>
+  <AboutHero />
+  <AboutGear />
+  <AboutProcess />
+</Layout>

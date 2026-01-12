@@ -1,0 +1,114 @@
+---
+import { Icon } from "astro-icon/components";
+import ProcessStepCard from "../../cards/process-step-card.astro";
+
+const steps = [
+  {
+    icon: "lucide:message-square-dashed",
+    step: "01",
+    title: "Reserva y briefing",
+    description:
+      "Conversamos sobre tu historia, estilo y expectativas. Definimos fechas, localizaciones y el tipo de sesión que mejor encaja contigo.",
+  },
+  {
+    icon: "lucide:aperture",
+    step: "02",
+    title: "Sesión fotográfica",
+    description:
+      "Dirijo la sesión de forma cercana para que te sientas cómodo mientras busco luz, ángulos y momentos auténticos que cuenten tu historia.",
+  },
+  {
+    icon: "lucide:palette",
+    step: "03",
+    title: "Edición y curaduría",
+    description:
+      "Selecciono y edito cuidadosamente cada imagen para construir una narrativa coherente, cuidando color, textura y atmósfera.",
+  },
+  {
+    icon: "lucide:gift",
+    step: "04",
+    title: "Entrega y acompañamiento",
+    description:
+      "Recibes tu galería online en alta resolución, lista para compartir o imprimir, junto a recomendaciones para sacarle el máximo partido.",
+  },
+];
+---
+
+<section
+  id="about-process"
+  class="relative py-24 md:py-32 bg-background overflow-hidden"
+  aria-labelledby="process-heading"
+>
+  <!-- Fondo mejorado con gradientes sutiles -->
+  <div class="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+    <div
+      class="absolute inset-0 bg-linear-to-br from-background via-background to-primary/3"
+    >
+    </div>
+    <div
+      class="absolute top-1/4 -right-40 w-80 h-80 bg-primary/10 rounded-full blur-[120px] opacity-40"
+    >
+    </div>
+    <div
+      class="absolute bottom-1/4 -left-40 w-80 h-80 bg-primary/10 rounded-full blur-[120px] opacity-40"
+    >
+    </div>
+  </div>
+
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-2xl mx-auto mb-16 md:mb-20 space-y-6">
+      <div
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-linear-to-r from-primary/10 to-primary/5 border border-primary/20 text-primary text-sm font-medium tracking-wide motion-translate-y-in-20 motion-opacity-in-0 motion-duration-600"
+      >
+        <Icon name="lucide:sparkles" class="w-4 h-4" />
+        <span>Proceso claro y personalizado</span>
+      </div>
+
+      <h2
+        id="process-heading"
+        class="text-4xl md:text-5xl lg:text-6xl font-serif font-bold tracking-tight text-foreground motion-translate-y-in-20 motion-opacity-in-0 motion-duration-700"
+      >
+        Cada momento,
+        <span class="relative">
+          <span
+            class="bg-clip-text text-transparent bg-linear-to-r from-primary via-primary to-primary/80 relative z-10"
+            >capturado con propósito</span
+          >
+          <span
+            class="absolute -bottom-2 left-0 w-full h-0.5 bg-primary/10 -z-10 rounded-full"
+          ></span>
+        </span>
+      </h2>
+
+      <p
+        class="text-lg text-muted-foreground leading-relaxed motion-translate-y-in-20 motion-opacity-in-0 motion-duration-700 motion-delay-100"
+      >
+        Un flujo de trabajo transparente donde cada etapa está diseñada para
+        garantizar resultados excepcionales sin complicaciones.
+      </p>
+    </div>
+
+    <div class="relative max-w-6xl mx-auto">
+      <div
+        class="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-linear-to-b from-transparent via-primary/15 to-transparent md:-translate-x-1/2 z-0"
+      >
+      </div>
+
+      <div class="space-y-12 md:space-y-0">
+        {
+          steps.map((item, index) => (
+            <ProcessStepCard
+              step={item.step}
+              icon={item.icon}
+              title={item.title}
+              description={item.description}
+              index={index}
+              isEven={index % 2 === 0}
+              delay={index * 100}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

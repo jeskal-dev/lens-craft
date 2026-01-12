@@ -1,0 +1,56 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<section
+  id="contact-location"
+  class="pb-24 pt-16 md:pb-32 md:pt-20 bg-background"
+  aria-labelledby="location-heading"
+>
+  <div class="container mx-auto px-6 space-y-6">
+    <div
+      class="flex flex-col md:flex-row md:items-center md:justify-between gap-4"
+    >
+      <div class="space-y-1">
+        <h2
+          id="location-heading"
+          class="text-lg md:text-xl font-serif font-semibold text-foreground"
+        >
+          Estudio LensCraft
+        </h2>
+        <p class="text-sm text-muted-foreground">
+          Recibimos visitas con cita previa en nuestro estudio en el centro de
+          Madrid.
+        </p>
+      </div>
+      <div class="flex flex-wrap gap-3 text-xs text-muted-foreground">
+        <span class="inline-flex items-center gap-2">
+          <Icon name="lucide:clock" class="w-4 h-4" />
+          <span>Lunes a viernes · 10:00 - 19:00</span>
+        </span>
+        <span class="inline-flex items-center gap-2">
+          <Icon name="lucide:instagram" class="w-4 h-4" />
+          <a href="#" class="hover:text-primary transition-colors">
+            @lenscraft.studio
+          </a>
+        </span>
+      </div>
+    </div>
+
+    <section
+      aria-label="Mapa de ubicación del estudio LensCraft"
+      class="rounded-2xl overflow-hidden border border-border/60 bg-card motion-translate-y-in-30 motion-opacity-in-0 motion-duration-800 motion-delay-400"
+    >
+      <div class="aspect-4/3 md:aspect-16/6 w-full">
+        <iframe
+          title="Ubicación del estudio LensCraft en Madrid"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3036.503037987979!2d-3.689!3d40.421!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd42289c5d9b1a0b%3A0x0!2sBarrio%20de%20Las%20Letras%2C%20Madrid!5e0!3m2!1ses!2ses!4v1700000000000"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          class="w-full h-full border-0"
+        >
+        </iframe>
+      </div>
+    </section>
+  </div>
+</section>

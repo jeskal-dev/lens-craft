@@ -1,0 +1,110 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<section
+  id="about-gear"
+  class="py-20 md:py-24 bg-background"
+  aria-labelledby="gear-heading"
+>
+  <div class="container mx-auto px-6 space-y-12 md:space-y-16">
+    <header class="max-w-2xl space-y-3">
+      <p
+        class="text-xs font-bold uppercase tracking-[0.25em] text-primary motion-translate-y-in-20 motion-opacity-in-0 motion-duration-700"
+      >
+        El equipo
+      </p>
+      <h2
+        id="gear-heading"
+        class="text-3xl md:text-4xl font-serif font-bold text-foreground tracking-tight motion-translate-y-in-30 motion-opacity-in-0 motion-duration-800"
+      >
+        Herramientas pensadas para la
+        <span class="italic text-primary">excelencia técnica.</span>
+      </h2>
+      <p
+        class="text-base md:text-lg text-muted-foreground leading-relaxed motion-translate-y-in-30 motion-opacity-in-0 motion-duration-800 motion-delay-150"
+      >
+        Trabajo con un set de cámaras, lentes y accesorios seleccionados para
+        garantizar nitidez, rango dinámico y colorimetría fiel tanto en estudio
+        como en exteriores.
+      </p>
+    </header>
+
+    <div
+      class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10"
+      aria-label="Equipos fotográficos utilizados habitualmente"
+    >
+      <article
+        class="rounded-2xl border border-border bg-card/60 backdrop-blur-sm p-6 space-y-4 shadow-sm motion-translate-y-in-30 motion-opacity-in-0 motion-duration-700"
+      >
+        <div class="flex items-center gap-3">
+          <div
+            class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center"
+          >
+            <Icon name="lucide:camera" class="w-5 h-5 text-primary" />
+          </div>
+          <h3 class="text-base font-semibold text-foreground">
+            Cuerpos profesionales full-frame
+          </h3>
+        </div>
+        <p class="text-sm text-muted-foreground leading-relaxed">
+          Cámaras de alta resolución con excelente rendimiento en baja luz,
+          perfectas para bodas, retratos íntimos y escenas nocturnas.
+        </p>
+        <ul class="space-y-1.5 text-sm text-muted-foreground">
+          <li>Autofoco rápido y preciso</li>
+          <li>Rango dinámico amplio para conservar detalles</li>
+          <li>Fiabilidad en entornos exigentes</li>
+        </ul>
+      </article>
+
+      <article
+        class="rounded-2xl border border-border bg-card/60 backdrop-blur-sm p-6 space-y-4 shadow-sm motion-translate-y-in-30 motion-opacity-in-0 motion-duration-700 motion-delay-100"
+      >
+        <div class="flex items-center gap-3">
+          <div
+            class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center"
+          >
+            <Icon name="lucide:aperture" class="w-5 h-5 text-primary" />
+          </div>
+          <h3 class="text-base font-semibold text-foreground">
+            Lentes luminosos y precisos
+          </h3>
+        </div>
+        <p class="text-sm text-muted-foreground leading-relaxed">
+          Ópticas fijas y zooms profesionales que permiten desenfoques suaves,
+          textura rica y una estética cinematográfica consistente.
+        </p>
+        <ul class="space-y-1.5 text-sm text-muted-foreground">
+          <li>Primers luminosos para retratos expresivos</li>
+          <li>Lentes gran angular para narrativas de espacio</li>
+          <li>Teleobjetivos para momentos discretos</li>
+        </ul>
+      </article>
+
+      <article
+        class="rounded-2xl border border-border bg-card/60 backdrop-blur-sm p-6 space-y-4 shadow-sm motion-translate-y-in-30 motion-opacity-in-0 motion-duration-700 motion-delay-200"
+      >
+        <div class="flex items-center gap-3">
+          <div
+            class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center"
+          >
+            <Icon name="lucide:cpu" class="w-5 h-5 text-primary" />
+          </div>
+          <h3 class="text-base font-semibold text-foreground">
+            Flujo digital y edición cuidada
+          </h3>
+        </div>
+        <p class="text-sm text-muted-foreground leading-relaxed">
+          Un flujo de trabajo calibrado para preservar la naturalidad mientras
+          se potencia el carácter de cada escena.
+        </p>
+        <ul class="space-y-1.5 text-sm text-muted-foreground">
+          <li>Revelado en RAW con control fino del color</li>
+          <li>Respaldo seguro de todos los archivos</li>
+          <li>Entrega optimizada para web e impresión</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
