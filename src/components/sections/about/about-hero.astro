@@ -100,8 +100,6 @@ import Button from "../../ui/button.astro";
             href="/gallery"
             size="lg"
             rounded="full"
-            withIcon
-            iconPosition="right"
             class="bg-primary hover:bg-primary/90 shadow-lg hover:shadow-primary/25"
           >
             Ver portafolio
@@ -121,23 +119,19 @@ import Button from "../../ui/button.astro";
         </div>
       </div>
 
-      <!-- Columna derecha: Imagen mejorada - Compacta y estratégica -->
       <div class="relative lg:pt-12">
-        <div class="flex flex-col items-center lg:items-start">
-          <!-- Contenedor principal de imagen - Tamaño reducido -->
+        <div class="flex flex-col items-center">
           <div class="relative w-full max-w-sm mx-auto">
-            <!-- Marco decorativo sutil -->
             <div
               class="absolute -inset-3 rounded-2xl bg-linear-to-br from-primary/10 via-transparent to-transparent -z-10 opacity-70"
             >
             </div>
 
-            <!-- Imagen principal - Proporción más equilibrada -->
             <div
               class="relative aspect-4/5 rounded-xl overflow-hidden shadow-xl border border-white/10 bg-background"
             >
               <img
-                src="https://images.unsplash.com/photo-1516031190212-da133013de50?q=80&w=800&auto=format&fit=crop"
+                src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1600&auto=format&fit=crop&fm=webp"
                 alt="Fotógrafo profesional trabajando con cámara"
                 class="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
                 loading="eager"

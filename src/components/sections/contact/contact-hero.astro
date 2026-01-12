@@ -29,9 +29,7 @@ import Select from "../../ui/select.astro";
 
   <div class="container mx-auto px-4 sm:px-6">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-      <!-- Left Content Column -->
       <div class="lg:col-span-6 space-y-8">
-        <!-- Badge -->
         <div
           class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs md:text-sm font-semibold uppercase tracking-[0.2em] motion-translate-y-in-20 motion-opacity-in-0 motion-duration-700"
         >
@@ -39,7 +37,6 @@ import Select from "../../ui/select.astro";
           <span>Contacto directo</span>
         </div>
 
-        <!-- Header -->
         <header class="space-y-6">
           <h1
             id="contact-heading"
@@ -62,7 +59,6 @@ import Select from "../../ui/select.astro";
           </p>
         </header>
 
-        <!-- Contact Info Cards -->
         <div
           class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-8 border-t border-border/40 motion-opacity-in-0 motion-duration-800 motion-delay-250"
           aria-label="Información de contacto"
@@ -121,19 +117,19 @@ import Select from "../../ui/select.astro";
 
         <!-- CTA Section -->
         <div
-          class="flex flex-col sm:flex-row gap-6 items-start sm:items-center pt-8 motion-translate-y-in-30 motion-opacity-in-0 motion-duration-800 motion-delay-350"
+          class="flex flex-col gap-6 items-start sm:items-center pt-8 motion-translate-y-in-30 motion-opacity-in-0 motion-duration-800 motion-delay-350"
         >
           <Button
             href="/services"
             variant="outline"
-            size="lg"
-            rounded="full"
-            class="bg-background/80 backdrop-blur-sm hover:bg-primary/5"
+            size="md"
+            rounded="lg"
+            class="w-full justify-center"
           >
-            <Icon name="lucide:package" class="w-5 h-5 mr-2" />
+            <Icon name="lucide:package" class="w-4 h-4 mr-2" />
             Ver paquetes y precios
           </Button>
-          <div class="flex items-start gap-3">
+          <div class="flex items-center gap-3">
             <div class="mt-0.5 p-1 rounded-full bg-green-500/10">
               <Icon name="lucide:shield-check" class="w-4 h-4 text-green-500" />
             </div>
@@ -147,7 +143,6 @@ import Select from "../../ui/select.astro";
         </div>
       </div>
 
-      <!-- Form Column -->
       <div
         class="lg:col-span-6 motion-scale-in-95 motion-opacity-in-0 motion-duration-800 motion-delay-300"
       >
@@ -296,18 +291,18 @@ import Select from "../../ui/select.astro";
               <!-- Privacy & Submit -->
               <div class="space-y-6 pt-4 border-t border-border/40">
                 <div class="flex items-start gap-3">
-                  <div class="relative mt-0.5">
+                  <div class="relative mt-0.5 flex flex-col items-center">
                     <input
                       id="privacy"
                       name="privacy"
                       type="checkbox"
                       required
                       data-field="checkbox"
-                      class="appearance-none h-5 w-5 rounded border border-border bg-background checked:bg-primary checked:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 transition-colors"
+                      class="appearance-none h-5 w-5 rounded border border-border bg-background checked:bg-primary checked:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 transition-colors peer"
                     />
                     <Icon
                       name="lucide:check"
-                      class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3 h-3 text-white pointer-events-none opacity-0 checked:opacity-100"
+                      class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 size-4text-white pointer-events-none opacity-0 peer-checked:opacity-100"
                       data-check-icon
                     />
                   </div>
@@ -392,7 +387,7 @@ import Select from "../../ui/select.astro";
   </div>
 </section>
 
-<style>
+<style is:global>
   @reference '../../../styles/global.css';
 
   .contact-input {

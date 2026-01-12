@@ -18,33 +18,44 @@ const { work, index } = Astro.props;
     <!-- Close Button (Floating & Pulsing) -->
     <button
       data-close-dialog
-      class="absolute top-10 right-10 z-20 p-2 rounded-full bg-white/5 border border-white/10 text-white hover:bg-primary hover:scale-110 active:scale-95 transition-all duration-500 group overflow-hidden"
+      class="absolute top-10 right-10 z-30 p-2 rounded-full bg-white/5 border border-white/10 text-white hover:bg-primary hover:scale-110 active:scale-95 transition-all duration-500 group overflow-hidden"
       aria-label="Cerrar modal"
     >
       <div
         class="absolute inset-0 bg-primary/20 scale-0 group-hover:scale-150 transition-transform duration-700 rounded-full blur-xl"
       >
       </div>
-
       <Icon
         name="lucide:x"
         class="size-4 relative z-10 group-hover:rotate-180 transition-transform duration-700"
       />
     </button>
 
-    <!-- Cinematic Image (Half-bleed or full height) -->
+    <!-- Cinematic Image (contenida + fondo difuminado) -->
     <div
-      class="w-full md:w-3/5 h-[40vh] md:h-auto overflow-hidden relative group/modal-img"
+      class="w-full md:w-3/5 h-[40vh] md:h-auto overflow-hidden relative isolate"
     >
+      <!-- Fondo difuminado (misma imagen, cover, blur) -->
       <div
-        class="absolute inset-0 bg-linear-to-r from-black/40 to-transparent z-10 pointer-events-none"
+        class="absolute inset-0 scale-110 brightness-75 contrast-125 blur-2xl"
+        style={`background-image:url('${work.data.image}'); background-size:cover; background-position:center;`}
       >
       </div>
+
+      <!-- Imagen principal (contenida) -->
       <img
         src={work.data.image}
         alt={work.data.title}
-        class="w-full h-full object-cover transition-transform duration-[2s] hover:scale-105"
+        class="relative z-10 w-full h-full object-contain"
       />
+
+      <!-- Overlay gradient -->
+      <div
+        class="absolute inset-0 bg-linear-to-r from-black/40 to-transparent pointer-events-none"
+      >
+      </div>
+
+      <!-- Meta inferior (desktop) -->
       <div
         class="absolute inset-x-8 bottom-8 z-20 hidden md:flex items-center justify-between text-xs text-white/60 font-mono"
       >
